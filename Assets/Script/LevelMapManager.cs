@@ -65,5 +65,15 @@ public class LevelMapManager : MonoBehaviour
         m_PaperLevelNameImage[level].SetActive(true);
         m_PaperInfoText.SetActive(true);
         m_PaperPlayButton.SetActive(true);
+
+        TextManager.LoadPaperInfoText(m_PaperInfoText, findLevelFileName(level));
+    }
+
+    private string findLevelFileName(int level)
+    {
+        ELevelFileNameInfo enumLevel = (ELevelFileNameInfo)Enum.ToObject(typeof(ELevelFileNameInfo), level);
+        string levelFileName = enumLevel.ToString();
+
+        return levelFileName;
     }
 }
