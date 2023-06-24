@@ -44,6 +44,6 @@ public class LevelManager : MonoBehaviour
 
     private void ShowLevel()
     {
-        throw new NotImplementedException("things to display level information to user. Level: " + m_CurrentLevel);
+        LevelMapManager.Singleton.ShowLevelMap(m_CurrentLevel);
     }
 }
