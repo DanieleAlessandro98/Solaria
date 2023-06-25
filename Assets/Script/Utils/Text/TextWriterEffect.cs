@@ -16,11 +16,12 @@ public class TextWriterEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_TextComponent = GetComponent<TMP_Text>();
     }
 
     public void LoadEffect()
     {
+        m_TextComponent = GetComponent<TMP_Text>();
+
         m_FullText = m_TextComponent.text;
         m_CurrentText = "";
         StartCoroutine(WriterEffect());

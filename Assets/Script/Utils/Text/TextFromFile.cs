@@ -16,11 +16,11 @@ public class TextFromFile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textComponent = GetComponent<TMP_Text>();
     }
 
     public void LoadText(string fileName)
     {
+        textComponent = GetComponent<TMP_Text>();
         textFilePath = Path.Combine(RELATIVE_PATH, fileName + TEXT_EXTENSION);
 
         if (File.Exists(textFilePath))
