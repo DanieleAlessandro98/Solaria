@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class TextManager
 {
-    public static void LoadPaperInfoText(GameObject textObject, string fileName)
+    public static void LoadPaperInfoText(GameObject textObject, string fileName, Action callback)
     {
         if (!textObject)
             return;
@@ -14,6 +14,7 @@ public static class TextManager
         textFromFile.LoadText(fileName);
 
         TextWriterEffect textWriterEffect = textObject.GetComponent<TextWriterEffect>();
+        textWriterEffect.writerEffectFinished += callback;
         textWriterEffect.LoadEffect();
     }
 }

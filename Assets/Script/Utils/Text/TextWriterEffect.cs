@@ -10,6 +10,8 @@ public class TextWriterEffect : MonoBehaviour
     private string m_FullText;
     private string m_CurrentText;
 
+    public event Action writerEffectFinished;
+
     [SerializeField]
     private float delay = 0.1f;
 
@@ -36,5 +38,12 @@ public class TextWriterEffect : MonoBehaviour
 
             yield return new WaitForSeconds(delay);
         }
+
+        OnWriterEffectFinished();
+    }
+
+    protected virtual void OnWriterEffectFinished()
+    {
+        writerEffectFinished.Invoke();
     }
 }
