@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager m_Singleton;
 
-    private bool isDead;
+    private bool m_IsDead;
 
     public static GameManager Singleton
     {
@@ -30,11 +30,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isDead = false;
+        m_IsDead = false;
     }
 
     public bool IsDead()
     {
-        return isDead;
+        return m_IsDead;
     }
 }
