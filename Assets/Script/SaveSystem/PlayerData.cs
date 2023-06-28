@@ -16,4 +16,9 @@ public class PlayerData
     {
         return level;
     }
+
+    public void SetLevel(int level)
+    {
+        this.level = level;
+    }
 }

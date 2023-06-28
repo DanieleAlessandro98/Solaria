@@ -8,8 +8,6 @@ public class LevelManager : MonoBehaviour
 {
     private static LevelManager m_Singleton;
 
-    public static readonly int FIRST_LEVEL = 0;
-
     private int m_CurrentLevel;
 
     public static LevelManager Singleton
@@ -34,7 +32,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_CurrentLevel = PlayerDataManager.Singleton.LoadPlayerData().GetLevel();
+        LoadData();
         StartCoroutine(WaitForShowLevel());
     }
 
@@ -58,5 +56,16 @@ public class LevelManager : MonoBehaviour
     public int GetCurrentLevel()
     {
         return m_CurrentLevel;
+    }
+
+    //TODO: SaveData e LoadData in interfaccia
+    private void SaveData()
+    {
+        GameDataManager.Singleton.SavePlayerData(m_CurrentLevel);
+    }
+
+    private void LoadData()
+    {
+        m_CurrentLevel = GameDataManager.Singleton.GetCurrentLevel();
     }
 }
