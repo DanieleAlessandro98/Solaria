@@ -48,7 +48,6 @@ public class GameDataManager : MonoBehaviour
         if (coins != NOT_INCLUDED_IN_SAVE)
             m_PlayerData.SetCoins(coins);
 
-        Debug.LogError("coins = " + GetCurrentCoins());
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream fileStream = new FileStream(PATH, FileMode.Create);
 
