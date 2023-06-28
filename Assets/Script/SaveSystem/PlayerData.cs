@@ -6,10 +6,12 @@ using UnityEngine;
 public class PlayerData
 {
     private int level;
+    private int coins;
 
-    public PlayerData(int level)
+    public PlayerData(int level, int coins)
     {
         this.level = level;
+        this.coins = coins;
     }
 
     public int GetLevel()
@@ -17,8 +19,18 @@ public class PlayerData
         return level;
     }
 
+    public int GetCoins()
+    {
+        return coins;
+    }
+
     public void SetLevel(int level)
     {
         this.level = level;
+    }
+
+    public void SetCoins(int coins)
+    {
+        this.coins = coins;
     }
 }

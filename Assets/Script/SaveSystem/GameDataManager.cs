@@ -14,6 +14,7 @@ public class GameDataManager : MonoBehaviour
 
     public static readonly int NOT_INCLUDED_IN_SAVE = -1;
     public static readonly int FIRST_LEVEL = 0;
+    public static readonly int FIRST_COIN = 0;
 
     private PlayerData m_PlayerData;
 
@@ -39,11 +40,15 @@ public class GameDataManager : MonoBehaviour
         LoadPlayerData();
     }
 
-    public void SavePlayerData(int level)
+    public void SavePlayerData(int level, int coins)
     {
         if (level != NOT_INCLUDED_IN_SAVE)
             m_PlayerData.SetLevel(level);
 
+        if (coins != NOT_INCLUDED_IN_SAVE)
+            m_PlayerData.SetCoins(coins);
+
+        Debug.LogError("coins = " + GetCurrentCoins());
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream fileStream = new FileStream(PATH, FileMode.Create);
 
@@ -62,11 +67,16 @@ public class GameDataManager : MonoBehaviour
             fileStream.Close();
         }
         else
-            m_PlayerData = new PlayerData(FIRST_LEVEL);
+            m_PlayerData = new PlayerData(FIRST_LEVEL, FIRST_COIN);
     }
 
     public int GetCurrentLevel()
     {
         return m_PlayerData.GetLevel();
+    }
+
+    public int GetCurrentCoins()
+    {
+        return m_PlayerData.GetCoins();
     }
 }

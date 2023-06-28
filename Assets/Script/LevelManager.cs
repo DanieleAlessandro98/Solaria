@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
     //TODO: SaveData e LoadData in interfaccia
     private void SaveData()
     {
-        GameDataManager.Singleton.SavePlayerData(m_CurrentLevel);
+        GameDataManager.Singleton.SavePlayerData(m_CurrentLevel, GameDataManager.NOT_INCLUDED_IN_SAVE);
     }
 
     private void LoadData()

@@ -26,7 +26,7 @@ public class Coin : MonoBehaviour
 
 	public void Collect()
 	{
-		//TODO: CollectCoin();
+		GameManager.Singleton.CollectCoin();
 
 		m_SpriteRenderer.enabled = false;
 		m_Collider2D.enabled = false;
