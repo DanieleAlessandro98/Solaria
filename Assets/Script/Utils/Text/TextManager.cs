@@ -17,4 +17,17 @@ public static class TextManager
         textWriterEffect.writerEffectFinished += callback;
         textWriterEffect.LoadEffect();
     }
+
+    public static void LoadDialogInfoText(GameObject textObject, string fileName, Action callback)
+    {
+        if (!textObject)
+            return;
+
+        TextFromFile textFromFile = textObject.GetComponent<TextFromFile>();
+        textFromFile.LoadText(fileName, ETextType.Dialogs);
+
+        TextWriterEffect textWriterEffect = textObject.GetComponent<TextWriterEffect>();
+        textWriterEffect.writerEffectFinished += callback;
+        textWriterEffect.LoadEffect();
+    }
 }

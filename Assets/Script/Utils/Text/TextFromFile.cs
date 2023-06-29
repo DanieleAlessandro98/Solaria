@@ -28,4 +28,15 @@ public class TextFromFile : MonoBehaviour
         else
             Debug.LogError("LoadText: File not found - " + textFilePath);
     }
+
+    public void LoadText(string fileName, ETextType textType)
+    {
+        textComponent = GetComponent<TMP_Text>();
+        textFilePath = Path.Combine(Path.Combine(RELATIVE_PATH, textType.ToString()), fileName + TEXT_EXTENSION);
+
+        if (File.Exists(textFilePath))
+            textComponent.text = File.ReadAllText(textFilePath);
+        else
+            Debug.LogError("LoadText: File not found - " + textFilePath);
+    }
 }

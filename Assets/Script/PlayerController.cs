@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Move(float horizontalAxis)
 	{
-		if (!GameManager.Singleton.IsDead())
+		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
 			float speed = m_CurrentRunSpeed;
 
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Jump()
 	{
-		if (!GameManager.Singleton.IsDead())
+		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
 			if (m_GroundChecker.IsGrounded())
 			{
