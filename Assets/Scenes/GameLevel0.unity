@@ -1663,6 +1663,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DialogCanvas: {fileID: 2122459876}
+  m_DialogInfoText: {fileID: 1956321408}
+  m_DialogCloseButton: {fileID: 1341468959}
 --- !u!4 &563238390
 Transform:
   m_ObjectHideFlags: 0
@@ -3905,7 +3907,7 @@ GameObject:
   - component: {fileID: 1341468962}
   - component: {fileID: 1341468961}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5461,6 +5463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Collider2D: {fileID: 1938080624}
+  m_DialogName: 0
 --- !u!61 &1938080624
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5498,8 +5501,10 @@ GameObject:
   - component: {fileID: 1956321409}
   - component: {fileID: 1956321411}
   - component: {fileID: 1956321410}
+  - component: {fileID: 1956321413}
+  - component: {fileID: 1956321412}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: InfoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5545,15 +5550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'qqqq
-
-    qqq
-
-    qq
-
-    qqq
-
-    qqqqqqqqqqqqqqqqqqqqqqqqq'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd175ebb8d76e704fbb9d22229b2d30e, type: 2}
   m_sharedMaterial: {fileID: -1580741120855321324, guid: fd175ebb8d76e704fbb9d22229b2d30e, type: 2}
@@ -5580,7 +5577,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.85
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5630,6 +5627,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956321408}
   m_CullTransparentMesh: 1
+--- !u!114 &1956321412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956321408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3e4a7ee81177148ba1aeaf1e730f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.1
+--- !u!114 &1956321413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956321408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3159cd24fdf0e96408927290d5fd9815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1964664421
 GameObject:
   m_ObjectHideFlags: 0

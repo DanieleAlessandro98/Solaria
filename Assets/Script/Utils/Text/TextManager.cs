@@ -11,7 +11,7 @@ public static class TextManager
             return;
 
         TextFromFile textFromFile = textObject.GetComponent<TextFromFile>();
-        textFromFile.LoadText(fileName);
+        textFromFile.LoadText(fileName, ETextType.PaperMap);
 
         TextWriterEffect textWriterEffect = textObject.GetComponent<TextWriterEffect>();
         textWriterEffect.writerEffectFinished += callback;

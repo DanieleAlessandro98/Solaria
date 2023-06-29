@@ -4,5 +4,6 @@ using UnityEngine;
 
 public enum ETextType
 {
+    PaperMap,
     Dialogs,
 }
