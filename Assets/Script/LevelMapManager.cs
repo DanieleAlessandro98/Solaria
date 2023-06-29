@@ -70,10 +70,8 @@ public class LevelMapManager : MonoBehaviour
 
     private string findLevelFileName(int level)
     {
-        ELevelFileNameInfo enumLevel = (ELevelFileNameInfo)Enum.ToObject(typeof(ELevelFileNameInfo), level);
-        string levelFileName = enumLevel.ToString();
-
-        return levelFileName;
+        ELevelName levelName = LevelDictionary.levelNumber[level];
+        return LevelDictionary.levelInfoFile[levelName];
     }
 
     private void WriterEffectCompletedCallback()
