@@ -13,6 +13,9 @@ public class DialogManager : MonoBehaviour
     private GameObject m_DialogCanvas;
 
     [SerializeField]
+    private GameObject m_DialogNpcNameText;
+
+    [SerializeField]
     private GameObject m_DialogInfoText;
 
     [SerializeField]
@@ -47,10 +50,17 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(EDialogName dialogName)
     {
-        isDialogOpen = true;
         m_DialogCanvas.SetActive(true);
 
+        TextManager.LoadDialogNpcNameText(m_DialogNpcNameText, findDialogNpcName(dialogName));
         TextManager.LoadDialogInfoText(m_DialogInfoText, findDialogFileName(dialogName), WriterEffectCompletedCallback);
+
+        isDialogOpen = true;
+    }
+
+    private string findDialogNpcName(EDialogName dialogName)
+    {
+        return DialogDictionary.dialogNpcName[dialogName];
     }
 
     private string findDialogFileName(EDialogName dialogName)
@@ -68,9 +78,10 @@ public class DialogManager : MonoBehaviour
         return isDialogOpen;
     }
 
-    public void Test()
+    public void CloseDialog()
     {
         isDialogOpen = false;
         m_DialogCanvas.SetActive(false);
+        m_DialogCloseButton.SetActive(false);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public static class TextManager
@@ -16,6 +17,14 @@ public static class TextManager
         TextWriterEffect textWriterEffect = textObject.GetComponent<TextWriterEffect>();
         textWriterEffect.writerEffectFinished += callback;
         textWriterEffect.LoadEffect();
+    }
+
+    public static void LoadDialogNpcNameText(GameObject textObject, string npcName)
+    {
+        if (!textObject)
+            return;
+
+        textObject.GetComponent<TMP_Text>().text = npcName;
     }
 
     public static void LoadDialogInfoText(GameObject textObject, string fileName, Action callback)
