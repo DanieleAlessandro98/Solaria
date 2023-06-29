@@ -1663,6 +1663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DialogCanvas: {fileID: 2122459876}
+  m_DialogNpcNameText: {fileID: 1473822594}
   m_DialogInfoText: {fileID: 1956321408}
   m_DialogCloseButton: {fileID: 1341468959}
 --- !u!4 &563238390
@@ -3980,7 +3981,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 563238389}
         m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: CloseDialog
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4494,7 +4495,7 @@ GameObject:
   - component: {fileID: 1473822597}
   - component: {fileID: 1473822596}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NpcNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
