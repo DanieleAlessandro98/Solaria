@@ -9,6 +9,7 @@ public static class DialogDictionary
         //TODO: Togliere mentore e mettere nome official.
         //TODO: Giusto mettere stringa statica in questo modo? o meglio fare un piccolo database-style?
         { EDialogName.Level0_Welcome,   "Mentore" },
+        { EDialogName.Level0_Obstacle,  "Mentore" },
         { EDialogName.Level0_Jump,      "Mentore" },
         { EDialogName.Level0_Attack,    "Mentore" },
     };
@@ -16,6 +17,7 @@ public static class DialogDictionary
     public static Dictionary<EDialogName, string> dialogFile = new Dictionary<EDialogName, string>()
     {
         { EDialogName.Level0_Welcome,   "Level0_Welcome" },
+        { EDialogName.Level0_Obstacle,  "Level0_Obstacle" },
         { EDialogName.Level0_Jump,      "Level0_Jump" },
         { EDialogName.Level0_Attack,    "Level0_Attack" },
     };

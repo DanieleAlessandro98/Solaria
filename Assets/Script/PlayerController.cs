@@ -98,4 +98,10 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	}
+
+	public void Die()
+	{
+		if (!GameManager.Singleton.IsDead())
+			GameManager.Singleton.Dead();
+	}
 }

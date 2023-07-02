@@ -41,6 +41,12 @@ public class GameManager : MonoBehaviour
         return m_IsDead;
     }
 
+    public void Dead()
+    {
+        m_IsDead = true;
+        Application.Quit(); //TODO: Gestire la morte del pg
+    }
+
     private void SaveData()
     {
         GameDataManager.Singleton.SavePlayerData(GameDataManager.NOT_INCLUDED_IN_SAVE, m_Coins);
