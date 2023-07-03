@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,6 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField]
 	private float m_JumpStrength = 0.1f;
-
 
 	// Start is called before the first frame update
 	void Start()
@@ -51,10 +51,19 @@ public class PlayerController : MonoBehaviour
 		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
 	}
 
-	private void FixedUpdate()
+    private void FixedUpdate()
 	{
-		// Input Processing
-		Move(Input.GetAxis("Horizontal"));
+		if (DialogManager.Singleton.IsDialogOpen())
+			StopMove();
+		else
+			Move(Input.GetAxis("Horizontal"));
+	}
+
+	private void StopMove()
+	{
+		Vector2 velocity = m_Rigidbody2D.velocity;
+		velocity.x = 0f;
+		m_Rigidbody2D.velocity = velocity;
 	}
 
 	private void Move(float horizontalAxis)
