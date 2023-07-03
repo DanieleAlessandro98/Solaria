@@ -7,5 +7,6 @@ public enum EDialogName
     Level0_Welcome,
     Level0_Obstacle,
     Level0_Jump,
+    Level0_Coin,
     Level0_Attack,
 }

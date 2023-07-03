@@ -11,6 +11,7 @@ public static class DialogDictionary
         { EDialogName.Level0_Welcome,   "Mentore" },
         { EDialogName.Level0_Obstacle,  "Mentore" },
         { EDialogName.Level0_Jump,      "Mentore" },
+        { EDialogName.Level0_Coin,      "Mentore" },
         { EDialogName.Level0_Attack,    "Mentore" },
     };
 
@@ -19,6 +20,7 @@ public static class DialogDictionary
         { EDialogName.Level0_Welcome,   "Level0_Welcome" },
         { EDialogName.Level0_Obstacle,  "Level0_Obstacle" },
         { EDialogName.Level0_Jump,      "Level0_Jump" },
+        { EDialogName.Level0_Coin,      "Level0_Coin" },
         { EDialogName.Level0_Attack,    "Level0_Attack" },
     };
 }
