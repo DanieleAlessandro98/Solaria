@@ -117,6 +117,6 @@ public class PlayerController : MonoBehaviour
 	public void EnemyHit()
 	{
 		m_Animator.SetTrigger("Hit");
-		Die();
+		//Die();
 	}
 }

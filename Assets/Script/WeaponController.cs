@@ -12,6 +12,9 @@ public class WeaponController : MonoBehaviour
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
+		if (other.CompareTag("GroundChecker") || other.CompareTag("Ground"))
+			return;
+
 		//TODO: invece di PlayerController implementare una abstract class/interface
 		PlayerController character = other.GetComponent<PlayerController>();
 		if (character)
