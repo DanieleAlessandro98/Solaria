@@ -2778,6 +2778,49 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &928659223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5277818859061560657, guid: 6207b8dd9565e9c4e8749c18a189b195, type: 3}
+  m_PrefabInstance: {fileID: 26325846}
+  m_PrefabAsset: {fileID: 0}
+--- !u!68 &928659226
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928659223}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.46904865, y: -0.43160024}
+  - {x: 1.6708102, y: -0.8430591}
+  - {x: 1.9914411, y: -0.77898246}
+  - {x: 1.8090627, y: -0.5412487}
+  - {x: 0.62006295, y: -0.087400384}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!114 &928659227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928659223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7c3433d6278d84e88aca05317b557d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 1998423498}
 --- !u!1 &956873361
 GameObject:
   m_ObjectHideFlags: 0

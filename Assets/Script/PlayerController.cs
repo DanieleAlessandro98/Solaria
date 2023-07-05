@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float m_JumpStrength = 0.1f;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
 	{
 		m_Speed = Vector2.zero;
 		m_CurrentRunSpeed = 0f;
@@ -112,5 +112,10 @@ public class PlayerController : MonoBehaviour
 	{
 		if (!GameManager.Singleton.IsDead())
 			GameManager.Singleton.Dead();
+	}
+
+	public void EnemyHit()
+	{
+		Die();
 	}
 }
