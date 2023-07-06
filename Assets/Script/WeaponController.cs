@@ -4,31 +4,41 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-	//TODO: Mettere nomi statici di queste animazioni da qualche parte (ad esempio anche per "State" e "ChargeAttack2H" in EnemyController)
-	private const string ATTACK_ANIMATION = "ChargeAttack2H";
+    //TODO: Ottimizzazioni varie possibili:
+    // -- gameObject.CompareTag("Character") uso di interfacce per identificare il gameobject
+    // -- IsAttacking() ereditato in qualche modo sia da enemy sia da player
+    // --  character.EnemyHit(); e enemy.PlayerHit(); generalizzare
+    [SerializeField]
+    private Animator m_Animator;
 
-	[SerializeField]
-	private Animator m_Animator;
-
-	public void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("GroundChecker") || other.CompareTag("Ground"))
-			return;
-
-		//TODO: invece di PlayerController implementare una abstract class/interface
-		PlayerController character = other.GetComponent<PlayerController>();
-		if (character)
-		{
-			if (IsAttacking())
-				character.EnemyHit();
-		}
-	}
-
-	private bool IsAttacking()
+    public void OnTriggerEnter2D(Collider2D other)
     {
-		AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
-		bool isChargeAttack2HRunning = stateInfo.IsName(ATTACK_ANIMATION) && stateInfo.normalizedTime < 1f;
+        if (other.CompareTag("GroundChecker") || other.CompareTag("Ground"))
+            return;
 
-		return isChargeAttack2HRunning;
-	}
+        if (gameObject.CompareTag("Character"))
+        {
+            EnemyController enemy = other.GetComponent<EnemyController>();
+            if (enemy)
+            {
+                if (IsAttacking())
+                    enemy.PlayerHit();
+            }
+        }
+        else if (gameObject.CompareTag("Enemy"))
+        {
+            //TODO: invece di PlayerController implementare una abstract class/interface
+            PlayerController character = other.GetComponent<PlayerController>();
+            if (character)
+            {
+                if (IsAttacking())
+                    character.EnemyHit();
+            }
+        }
+    }
+
+    private bool IsAttacking()
+    {
+        return m_Animator.GetBool("isAttacking");
+    }
 }

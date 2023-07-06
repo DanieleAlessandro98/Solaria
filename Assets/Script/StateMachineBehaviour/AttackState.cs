@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SoloState : StateMachineBehaviour
+public class AttackState : StateMachineBehaviour
 {
     public string Name;
     public bool Continuous;
@@ -14,7 +14,7 @@ public class SoloState : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _enterTime = Time.time;
-        animator.SetBool("Action", true);
+        animator.SetBool("isAttacking", true);
         Active = true;
     }
 
@@ -39,13 +39,13 @@ public class SoloState : StateMachineBehaviour
 
         if (Continue == null)
         {
-            animator.SetBool("Action", KeepAction);
+            animator.SetBool("isAttacking", KeepAction);
         }
         else if (Continue != null)
         {
             if (!Continue())
             {
-                animator.SetBool("Action", KeepAction);
+                animator.SetBool("isAttacking", KeepAction);
             }
 
             Continue = null;

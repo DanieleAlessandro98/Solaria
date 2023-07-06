@@ -56,13 +56,13 @@ public class PlayerController : MonoBehaviour
 		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
 	}
 
-	private void StopMove()
+    private void StopMove()
 	{
 		Vector2 velocity = m_Rigidbody2D.velocity;
 		velocity.x = 0f;
 		m_Rigidbody2D.velocity = velocity;
 	}
-
+	
 	private void Move(float horizontalAxis)
 	{
 		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
@@ -113,7 +113,19 @@ public class PlayerController : MonoBehaviour
 
 	public void EnemyHit()
 	{
+		//TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
 		m_Animator.SetTrigger("Hit");
 		//Die();
 	}
+
+	public bool IsMoving()
+	{
+		return (m_Rigidbody2D.velocity.x > 0.1f);
+	}
+
+	public bool IsGrounded()
+    {
+		return m_GroundChecker.IsGrounded();
+	}
+
 }

@@ -134,6 +134,11 @@ public class EnemyController : MonoBehaviour
         m_IsAttacking = false;
     }
 
+    public void PlayerHit()
+    {
+        m_Animator.SetTrigger("Hit");
+    }
+
     private bool IsSpawnPosition()
     {
         float distance = Mathf.Abs(transform.position.x - m_SpawnPosition.x);
