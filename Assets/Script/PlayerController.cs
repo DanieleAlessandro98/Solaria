@@ -47,16 +47,13 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetButtonDown("Jump"))
 			Jump();
 
-		m_Animator.SetFloat("Speed", m_Speed.x);
-		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
-	}
-
-    private void FixedUpdate()
-	{
 		if (DialogManager.Singleton.IsDialogOpen())
 			StopMove();
 		else
 			Move(Input.GetAxis("Horizontal"));
+
+		m_Animator.SetFloat("Speed", m_Speed.x);
+		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
 	}
 
 	private void StopMove()
@@ -79,13 +76,13 @@ public class PlayerController : MonoBehaviour
 			if (horizontalAxis > 0f)
 			{
 				Vector3 scale = transform.localScale;
-				scale.x = Mathf.Sign(horizontalAxis) * 0.5f;
+				scale.x = Mathf.Sign(horizontalAxis) * 0.2f;
 				transform.localScale = scale;
 			}
 			else if (horizontalAxis < 0f)
 			{
 				Vector3 scale = transform.localScale;
-				scale.x = Mathf.Sign(horizontalAxis) * 0.5f;
+				scale.x = Mathf.Sign(horizontalAxis) * 0.2f;
 				transform.localScale = scale;
 			}
 

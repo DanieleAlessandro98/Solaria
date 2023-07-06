@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
 		//TODO: invece di PlayerController implementare una abstract class/interface
 		PlayerController character = other.GetComponent<PlayerController>();
 		if (character)
-        {
+		{
 			if (IsAttacking())
 				character.EnemyHit();
 		}
