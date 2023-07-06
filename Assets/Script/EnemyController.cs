@@ -18,6 +18,9 @@ public class EnemyController : MonoBehaviour
     private Transform m_Player;
 
     [SerializeField]
+    private bool m_IsFollowPlayer;
+
+    [SerializeField]
     private float m_InitialSpawnPositionRange = 10f;
 
     [SerializeField]
@@ -44,6 +47,9 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         if (m_Animator.GetBool("Action"))
+            return;
+
+        if (!m_IsFollowPlayer)
             return;
 
         float distanceSpawnPosition = Mathf.Abs(transform.position.x - m_SpawnPosition.x);
@@ -96,6 +102,11 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void PlayerHit()
+    {
+        m_Animator.SetTrigger("Hit");
+    }
+
     private void MoveToSpawnPosition()
     {
         m_Animator.SetInteger("State", 2);
@@ -132,11 +143,6 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(m_AttackDelay);
 
         m_IsAttacking = false;
-    }
-
-    public void PlayerHit()
-    {
-        m_Animator.SetTrigger("Hit");
     }
 
     private bool IsSpawnPosition()

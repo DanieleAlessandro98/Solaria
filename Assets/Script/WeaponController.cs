@@ -8,6 +8,10 @@ public class WeaponController : MonoBehaviour
     // -- gameObject.CompareTag("Character") uso di interfacce per identificare il gameobject
     // -- IsAttacking() ereditato in qualche modo sia da enemy sia da player
     // --  character.EnemyHit(); e enemy.PlayerHit(); generalizzare
+
+    //TODO: Mettere nomi statici di queste animazioni da qualche parte (ad esempio anche per "State" e "ChargeAttack2H" in EnemyController)
+    private const string ENEMY_ATTACK_ANIMATION = "ChargeAttack2H";
+
     [SerializeField]
     private Animator m_Animator;
 
@@ -31,7 +35,9 @@ public class WeaponController : MonoBehaviour
             PlayerController character = other.GetComponent<PlayerController>();
             if (character)
             {
-                if (IsAttacking())
+                AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
+
+                if (IsAttacking() && (stateInfo.IsName(ENEMY_ATTACK_ANIMATION) && stateInfo.normalizedTime < 1f))
                     character.EnemyHit();
             }
         }
