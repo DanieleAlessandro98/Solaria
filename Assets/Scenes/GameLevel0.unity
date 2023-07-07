@@ -1801,7 +1801,7 @@ MonoBehaviour:
   m_Animator: {fileID: 1998423498}
   m_Player: {fileID: 130523329}
   m_HealthBoard: {fileID: 559482944}
-  m_MaxHealth: 1000
+  m_MaxHealth: 100
   m_IsFollowPlayer: 1
   m_InitialSpawnPositionRange: 10
   m_PlayerFollowRange: 5
@@ -2394,7 +2394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2374989008031308591, guid: a08cc9e27cf78724884e3246e2127a8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 2374989008031308591, guid: a08cc9e27cf78724884e3246e2127a8b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4383,11 +4383,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 234.7
+      value: 234.2
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6342,7 +6342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 1326355380}
-  m_Player: {fileID: 130523326}
+  m_Player: {fileID: 130523329}
   m_HealthBoard: {fileID: 63229111}
   m_MaxHealth: 50
   m_IsFollowPlayer: 0

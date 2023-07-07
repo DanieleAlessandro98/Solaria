@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	private const float RUN_SPEED = 5f;
 	private const float RUN_SMOOTH_TIME = 5f;
 	private const int MAX_HEALTH = 3;
+	private readonly float DELAY_ENTITY_DIED = 3f;
 
 	private Vector2 m_Speed;
 	private float m_CurrentRunSpeed;
@@ -121,8 +122,12 @@ public class PlayerController : MonoBehaviour
 
 	public void Die()
 	{
-		if (!GameManager.Singleton.IsDead())
-			GameManager.Singleton.Dead();
+		Invoke("EntityDied", DELAY_ENTITY_DIED);
+	}
+
+	private void EntityDied()
+    {
+		GameManager.Singleton.Dead();
 	}
 
 	public void EnemyHit(int damage)

@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private readonly float DELAY_DEAD_SCENE = 3f;
-
     private static GameManager m_Singleton;
 
     private bool m_IsDead;
@@ -47,11 +45,6 @@ public class GameManager : MonoBehaviour
     public void Dead()
     {
         m_IsDead = true;
-        Invoke("LoadDeadScene", DELAY_DEAD_SCENE);
-    }
-
-    private void LoadDeadScene()
-    {
         SceneManager.LoadScene("DiedScene");    //TODO: Gestire la morte del pg
     }
 

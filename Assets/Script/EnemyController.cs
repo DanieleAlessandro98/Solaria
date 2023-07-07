@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 {
     private const float DISTANCE_TOLERANCE = 0.1f;
     private const int DAMAGE_TO_PLAYER = 1;
+    private readonly float DELAY_ENTITY_DIED = 3f;
 
     private Vector3 m_SpawnPosition;
     private EEnemyState m_CurrentState;
@@ -92,7 +93,7 @@ public class EnemyController : MonoBehaviour
                         {
                             m_CurrentState = EEnemyState.Attack;
 
-                            if (m_Player.IsAlive())
+                            if (IsAlive() && m_Player.IsAlive())
                                 StartCoroutine(AttackCoroutine());
                         }
                     }
@@ -124,18 +125,26 @@ public class EnemyController : MonoBehaviour
 
     public void PlayerHit(int damage)
     {
+        if (!IsAlive())
+            return;
+
         SetHealth(damage);
-        m_Animator.SetTrigger("Hit");
     }
 
     private void MoveToSpawnPosition()
     {
+        if (!IsAlive())
+            return;
+
         m_Animator.SetInteger("State", 2);
         Move(m_SpawnPosition.x);
     }
 
     private void MoveToPlayerPosition()
     {
+        if (!IsAlive())
+            return;
+
         m_Animator.SetInteger("State", 2);
         Move(m_Player.GetPositionX());
     }
@@ -176,10 +185,33 @@ public class EnemyController : MonoBehaviour
     {
         m_Health.SetCurrentHealth(damage);
         m_HealthBoard.SetHealth(m_Health.GetCurrentHealth(), m_Health.GetMaxHealth(), m_Health.CalcCurrentHealthPct());
+
+        if (IsAlive())
+            m_Animator.SetTrigger("Hit");
+        else
+        {
+            m_Animator.SetInteger("State", 9);
+            Die();
+        }
     }
 
     public int GetDamage()
     {
         return DAMAGE_TO_PLAYER;
+    }
+
+    public bool IsAlive()
+    {
+        return m_Health.IsAlive();
+    }
+
+    public void Die()
+    {
+        Invoke("EntityDied", DELAY_ENTITY_DIED);
+    }
+
+    private void EntityDied()
+    {
+        Destroy(gameObject);
     }
 }

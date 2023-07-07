@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # Unity Build Output
 /Output/*
+
+# Material changes
+/[Aa]ssets/Materials/LeftHp.mat
