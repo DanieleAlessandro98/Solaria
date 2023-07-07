@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: Inserire classe "Player" che gestisce il controller, la vita, il danno (ed altro(?))
 public class PlayerController : MonoBehaviour
 {
 	private const float MAX_RUN_SPEED = 8f;
@@ -126,12 +127,19 @@ public class PlayerController : MonoBehaviour
 
 	public void EnemyHit(int damage)
 	{
-		SetHealth(damage);
-		//TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
-		m_Animator.SetTrigger("Hit");
+		m_Health.SetCurrentHealth(damage);
+		m_HealthBoard.SetHealth(m_Health.CalcCurrentHealthPct());
+
+		if (IsAlive())
+			m_Animator.SetTrigger("Hit");   //TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
+		else
+        {
+			m_Animator.SetTrigger("Die");
+			Die();
+		}
 	}
 
-	public bool IsMoving()
+    public bool IsMoving()
 	{
 		return (m_Rigidbody2D.velocity.x > 0.1f);
 	}
@@ -141,10 +149,9 @@ public class PlayerController : MonoBehaviour
 		return m_GroundChecker.IsGrounded();
 	}
 
-	private void SetHealth(int damage)
+	public bool IsAlive()
 	{
-		m_Health.SetCurrentHealth(damage);
-		m_HealthBoard.SetHealth(m_Health.CalcCurrentHealthPct());
+		return m_Health.IsAlive();
 	}
 
 	public int GetDamage()
@@ -152,4 +159,8 @@ public class PlayerController : MonoBehaviour
 		return m_Damage;
 	}
 
+    public float GetPositionX()
+    {
+		return transform.position.x;
+    }
 }

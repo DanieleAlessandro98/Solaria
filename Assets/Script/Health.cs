@@ -34,6 +34,11 @@ public class Health
         return maxHealth;
     }
 
+    public bool IsAlive()
+    {
+        return currentHealth > 0;
+    }
+
     public static string GetHealthFormatting(int currentHealth, int maxHealth)
     {
         return currentHealth + "/" + maxHealth + " HP";

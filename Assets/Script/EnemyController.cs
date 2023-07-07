@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     private Animator m_Animator;
 
     [SerializeField]
-    private Transform m_Player;
+    private PlayerController m_Player;
 
     [SerializeField]
     private HealthEnemyBoard m_HealthBoard;
@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
             return;
 
         float distanceSpawnPosition = Mathf.Abs(transform.position.x - m_SpawnPosition.x);
-        float distancePlayer = Mathf.Abs(transform.position.x - m_Player.position.x);
+        float distancePlayer = Mathf.Abs(transform.position.x - m_Player.GetPositionX());
 
         switch (m_CurrentState)
         {
@@ -91,7 +91,9 @@ public class EnemyController : MonoBehaviour
                         else if (!m_IsAttacking)
                         {
                             m_CurrentState = EEnemyState.Attack;
-                            StartCoroutine(AttackCoroutine());
+
+                            if (m_Player.IsAlive())
+                                StartCoroutine(AttackCoroutine());
                         }
                     }
                 }
@@ -135,7 +137,7 @@ public class EnemyController : MonoBehaviour
     private void MoveToPlayerPosition()
     {
         m_Animator.SetInteger("State", 2);
-        Move(m_Player.position.x);
+        Move(m_Player.GetPositionX());
     }
 
     private void Move(float targetX)

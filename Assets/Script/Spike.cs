@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
+    private const int DAMAGE_TO_PLAYER = 1;
+
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
         PlayerController player = otherCollider.GetComponent<PlayerController>();
         if (player)
-            Kill(player);
+            player.EnemyHit(GetComponent<Spike>().GetDamage());
     }
 
-
-    private void Kill(PlayerController target)
-	{
-		target.Die();
-	}
+    public int GetDamage()
+    {
+        return DAMAGE_TO_PLAYER;
+    }
 }

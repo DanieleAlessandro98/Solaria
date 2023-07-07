@@ -5,7 +5,7 @@ public class HealthPlayerBoard : MonoBehaviour
 {
     private Material _material;
 
-    private void Start()
+    void Start()
     {
         _material = GetComponent<Image>().material;
         SetHealth(1f);

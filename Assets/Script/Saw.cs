@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
+    private const int DAMAGE_TO_PLAYER = 1;
+
     private Transform targetRotation;
     private float m_Speed;
 
@@ -26,14 +28,13 @@ public class Saw : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D collision2D)
 	{
 		//TODO: invece di PlayerController implementare una abstract class/interface
-		PlayerController character = collision2D.collider.GetComponent<PlayerController>();
-		if (character)
-			Kill(character);
-	}
-
-    private void Kill(PlayerController target)
-    {
-        target.Die();
+		PlayerController player = collision2D.collider.GetComponent<PlayerController>();
+		if (player)
+            player.EnemyHit(GetComponent<Saw>().GetDamage());
     }
 
+    public int GetDamage()
+    {
+        return DAMAGE_TO_PLAYER;
+    }
 }

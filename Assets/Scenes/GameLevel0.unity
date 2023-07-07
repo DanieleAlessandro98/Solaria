@@ -1799,7 +1799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 1998423498}
-  m_Player: {fileID: 130523326}
+  m_Player: {fileID: 130523329}
   m_HealthBoard: {fileID: 559482944}
   m_MaxHealth: 1000
   m_IsFollowPlayer: 1
@@ -4383,11 +4383,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 224.74
+      value: 234.7
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.31
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.z
