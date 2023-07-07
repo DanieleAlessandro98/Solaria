@@ -10,12 +10,19 @@ public class EnemyController : MonoBehaviour
     private Vector3 m_SpawnPosition;
     private EEnemyState m_CurrentState;
     private bool m_IsAttacking;
+    private Health m_Health;
 
     [SerializeField]
     private Animator m_Animator;
 
     [SerializeField]
     private Transform m_Player;
+
+    [SerializeField]
+    private HealthBoard m_HealthBoard;
+
+    [SerializeField]
+    private int m_MaxHealth;
 
     [SerializeField]
     private bool m_IsFollowPlayer;
@@ -35,12 +42,19 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float m_MovementSpeed = 2f;
 
+    void Awake()
+    {
+        m_Health = new Health(m_MaxHealth);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         m_SpawnPosition = transform.position;
         m_CurrentState = EEnemyState.SpawnPosition;
         m_IsAttacking = false;
+
+        SetHealth();
     }
 
     // Update is called once per frame
@@ -100,10 +114,13 @@ public class EnemyController : MonoBehaviour
                 }
                 break;
         }
+
+        m_HealthBoard.SetRotation(transform.localScale.x);
     }
 
     public void PlayerHit()
     {
+        SetHealth();
         m_Animator.SetTrigger("Hit");
     }
 
@@ -149,5 +166,10 @@ public class EnemyController : MonoBehaviour
     {
         float distance = Mathf.Abs(transform.position.x - m_SpawnPosition.x);
         return distance < DISTANCE_TOLERANCE;
+    }
+
+    private void SetHealth()
+    {
+        m_HealthBoard.SetHealth(m_Health.GetCurrentHealth(), m_Health.GetMaxHealth(), m_Health.CalcCurrentHealthPct());
     }
 }
