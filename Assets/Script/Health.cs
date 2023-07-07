@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,11 @@ public class Health
     {
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
+    }
+
+    public void SetCurrentHealth(int damage)
+    {
+        currentHealth -= damage;
     }
 
     public float CalcCurrentHealthPct()
@@ -32,4 +38,5 @@ public class Health
     {
         return currentHealth + "/" + maxHealth + " HP";
     }
+
 }

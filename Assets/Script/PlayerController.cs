@@ -25,8 +25,11 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float m_JumpStrength = 0.1f;
 
-    // Start is called before the first frame update
-    void Start()
+	[SerializeField]
+	private int m_Damage;
+
+	// Start is called before the first frame update
+	void Start()
 	{
 		m_Speed = Vector2.zero;
 		m_CurrentRunSpeed = 0f;
@@ -111,7 +114,7 @@ public class PlayerController : MonoBehaviour
 			GameManager.Singleton.Dead();
 	}
 
-	public void EnemyHit()
+	public void EnemyHit(int damage)
 	{
 		//TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
 		m_Animator.SetTrigger("Hit");
@@ -126,6 +129,11 @@ public class PlayerController : MonoBehaviour
 	public bool IsGrounded()
     {
 		return m_GroundChecker.IsGrounded();
+	}
+
+	public int GetDamage()
+	{
+		return m_Damage;
 	}
 
 }

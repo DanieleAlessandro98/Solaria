@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5276885103329431059, guid: 6207b8dd9565e9c4e8749c18a189b195, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5276906940499174943, guid: 6207b8dd9565e9c4e8749c18a189b195, type: 3}
       propertyPath: m_Layer
@@ -1297,6 +1297,7 @@ MonoBehaviour:
   m_Animator: {fileID: 130523324}
   m_GroundChecker: {fileID: 1262540918}
   m_JumpStrength: 7
+  m_Damage: 10
 --- !u!70 &130523331
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1743,6 +1744,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5275960318874114053, guid: 6207b8dd9565e9c4e8749c18a189b195, type: 3}
   m_PrefabInstance: {fileID: 26325846}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &337470539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337470530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7c3433d6278d84e88aca05317b557d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 1998423498}
 --- !u!43 &357351211
 Mesh:
   m_ObjectHideFlags: 0
@@ -3791,19 +3805,6 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &928659227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928659223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f7c3433d6278d84e88aca05317b557d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Animator: {fileID: 1998423498}
 --- !u!1 &956873361
 GameObject:
   m_ObjectHideFlags: 0

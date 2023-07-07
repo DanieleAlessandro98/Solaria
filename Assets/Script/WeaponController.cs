@@ -26,7 +26,7 @@ public class WeaponController : MonoBehaviour
             if (enemy)
             {
                 if (IsAttacking())
-                    enemy.PlayerHit();
+                    enemy.PlayerHit(GetComponent<PlayerController>().GetDamage());
             }
         }
         else if (gameObject.CompareTag("Enemy"))
@@ -38,7 +38,7 @@ public class WeaponController : MonoBehaviour
                 AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
 
                 if (IsAttacking() && (stateInfo.IsName(ENEMY_ATTACK_ANIMATION) && stateInfo.normalizedTime < 1f))
-                    character.EnemyHit();
+                    character.EnemyHit(GetComponent<EnemyController>().GetDamage());
             }
         }
     }

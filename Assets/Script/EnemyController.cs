@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: Inserire classe "Enemy" che gestisce il controller, la vita, il danno (ed altro(?))
 public class EnemyController : MonoBehaviour
 {
     private const float DISTANCE_TOLERANCE = 0.1f;
+    private const int DAMAGE_TO_PLAYER = 1;
 
     private Vector3 m_SpawnPosition;
     private EEnemyState m_CurrentState;
@@ -54,7 +56,7 @@ public class EnemyController : MonoBehaviour
         m_CurrentState = EEnemyState.SpawnPosition;
         m_IsAttacking = false;
 
-        SetHealth();
+        SetHealth(0);
     }
 
     // Update is called once per frame
@@ -118,9 +120,9 @@ public class EnemyController : MonoBehaviour
         m_HealthBoard.SetRotation(transform.localScale.x);
     }
 
-    public void PlayerHit()
+    public void PlayerHit(int damage)
     {
-        SetHealth();
+        SetHealth(damage);
         m_Animator.SetTrigger("Hit");
     }
 
@@ -168,8 +170,14 @@ public class EnemyController : MonoBehaviour
         return distance < DISTANCE_TOLERANCE;
     }
 
-    private void SetHealth()
+    private void SetHealth(int damage)
     {
+        m_Health.SetCurrentHealth(damage);
         m_HealthBoard.SetHealth(m_Health.GetCurrentHealth(), m_Health.GetMaxHealth(), m_Health.CalcCurrentHealthPct());
+    }
+
+    public int GetDamage()
+    {
+        return DAMAGE_TO_PLAYER;
     }
 }
