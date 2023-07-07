@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBoard : MonoBehaviour
+public class HealthEnemyBoard : MonoBehaviour
 {
     [SerializeField]
     private RectTransform healthRect;
@@ -19,7 +19,7 @@ public class HealthBoard : MonoBehaviour
 
     public void SetRotation(float scaleX)
     {
-        float angle = scaleX > 0 ? 0f : 180f;  // 0f per la rotazione normale, 180f per la rotazione invertita
+        float angle = scaleX > 0 ? 0f : 180f;
         healthText.rectTransform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 }

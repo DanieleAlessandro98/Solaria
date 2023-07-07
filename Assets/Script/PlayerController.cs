@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
 	private const float MAX_RUN_SPEED = 8f;
 	private const float RUN_SPEED = 5f;
 	private const float RUN_SMOOTH_TIME = 5f;
+	private const int MAX_HEALTH = 3;
 
 	private Vector2 m_Speed;
 	private float m_CurrentRunSpeed;
 	private float m_CurrentSmoothVelocity;
+	private Health m_Health;
 
 	[SerializeField]
 	private Rigidbody2D m_Rigidbody2D;
@@ -26,7 +28,15 @@ public class PlayerController : MonoBehaviour
 	private float m_JumpStrength = 0.1f;
 
 	[SerializeField]
+	private HealthPlayerBoard m_HealthBoard;
+
+	[SerializeField]
 	private int m_Damage;
+
+	void Awake()
+	{
+		m_Health = new Health(MAX_HEALTH);
+	}
 
 	// Start is called before the first frame update
 	void Start()
@@ -116,9 +126,9 @@ public class PlayerController : MonoBehaviour
 
 	public void EnemyHit(int damage)
 	{
+		SetHealth(damage);
 		//TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
 		m_Animator.SetTrigger("Hit");
-		//Die();
 	}
 
 	public bool IsMoving()
@@ -129,6 +139,12 @@ public class PlayerController : MonoBehaviour
 	public bool IsGrounded()
     {
 		return m_GroundChecker.IsGrounded();
+	}
+
+	private void SetHealth(int damage)
+	{
+		m_Health.SetCurrentHealth(damage);
+		m_HealthBoard.SetHealth(m_Health.CalcCurrentHealthPct());
 	}
 
 	public int GetDamage()

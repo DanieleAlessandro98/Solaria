@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     private Transform m_Player;
 
     [SerializeField]
-    private HealthBoard m_HealthBoard;
+    private HealthEnemyBoard m_HealthBoard;
 
     [SerializeField]
     private int m_MaxHealth;
