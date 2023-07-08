@@ -16,6 +16,9 @@ public class Health
 
     public void SetCurrentHealth(int damage)
     {
+        if (!IsAlive())
+            return;
+
         currentHealth -= damage;
     }
 

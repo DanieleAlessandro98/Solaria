@@ -189,10 +189,7 @@ public class EnemyController : MonoBehaviour
         if (IsAlive())
             m_Animator.SetTrigger("Hit");
         else
-        {
-            m_Animator.SetInteger("State", 9);
             Die();
-        }
     }
 
     public int GetDamage()
@@ -207,6 +204,8 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
+        m_Animator.SetInteger("State", 9);
+        GetComponent<Collider2D>().enabled = false;
         Invoke("EntityDied", DELAY_ENTITY_DIED);
     }
 
