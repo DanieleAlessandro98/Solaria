@@ -127,10 +127,10 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	public void Die()
+	public void Die(bool isResetPosition)
 	{
 		GameManager.Singleton.SetDead(true);
-		Invoke("EntityDied", DELAY_ENTITY_DIED);
+		Invoke("EntityDied", isResetPosition ? 0f : DELAY_ENTITY_DIED);
 	}
 
 	private void EntityDied()
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
 		else
         {
 			m_Animator.SetTrigger("Die");
-			Die();
+			Die(isResetPosition);
 		}
 	}
 
