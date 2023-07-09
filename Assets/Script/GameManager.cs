@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     private bool m_IsDead;
     private int m_Coins;
+
+    [SerializeField]
+    private TextMeshProUGUI m_CoinsText;
 
     public static GameManager Singleton
     {
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         LoadData();
         SetDead(false);
+        SetCoinsText();
     }
 
     public void SetDead(bool isDead)
@@ -65,6 +70,12 @@ public class GameManager : MonoBehaviour
     public void CollectCoin()
     {
         m_Coins++;
+        SetCoinsText();
         SaveData();
+    }
+
+    private void SetCoinsText()
+    {
+        m_CoinsText.text = m_Coins.ToString();
     }
 }
