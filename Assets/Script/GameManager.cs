@@ -34,7 +34,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LoadData();
-        m_IsDead = false;
+        SetDead(false);
+    }
+
+    public void SetDead(bool isDead)
+    {
+        m_IsDead = isDead;
     }
 
     public bool IsDead()
@@ -44,7 +49,6 @@ public class GameManager : MonoBehaviour
 
     public void Dead()
     {
-        m_IsDead = true;
         SceneManager.LoadScene("DiedScene");    //TODO: Gestire la morte del pg
     }
 

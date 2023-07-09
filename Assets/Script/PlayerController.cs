@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 	private float m_CurrentRunSpeed;
 	private float m_CurrentSmoothVelocity;
 	private Health m_Health;
+	private Vector2 m_LastCheckPointPosition;
 
 	[SerializeField]
 	private Rigidbody2D m_Rigidbody2D;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
 		m_Speed = Vector2.zero;
 		m_CurrentRunSpeed = 0f;
 		m_CurrentSmoothVelocity = 0f;
+		m_LastCheckPointPosition = Vector2.zero;
 	}
 
 	// Update is called once per frame
@@ -71,7 +73,12 @@ public class PlayerController : MonoBehaviour
 		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
 	}
 
-    private void StopMove()
+    public void SaveLastCheckPointPosition()
+    {
+		m_LastCheckPointPosition = new Vector2(transform.position.x, transform.position.y);
+	}
+
+	private void StopMove()
 	{
 		Vector2 velocity = m_Rigidbody2D.velocity;
 		velocity.x = 0f;
@@ -122,6 +129,7 @@ public class PlayerController : MonoBehaviour
 
 	public void Die()
 	{
+		GameManager.Singleton.SetDead(true);
 		Invoke("EntityDied", DELAY_ENTITY_DIED);
 	}
 
@@ -130,13 +138,21 @@ public class PlayerController : MonoBehaviour
 		GameManager.Singleton.Dead();
 	}
 
-	public void EnemyHit(int damage)
+	public void EnemyHit(int damage, bool isResetPosition = false)
 	{
 		m_Health.SetCurrentHealth(damage);
 		m_HealthBoard.SetHealth(m_Health.CalcCurrentHealthPct());
 
 		if (IsAlive())
-			m_Animator.SetTrigger("Hit");   //TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
+        {
+			if (isResetPosition)
+            {
+				StopMove();
+				MoveToLastCheckpoint();
+			}
+			else
+				m_Animator.SetTrigger("Hit");   //TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
+		}
 		else
         {
 			m_Animator.SetTrigger("Die");
@@ -144,9 +160,14 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-    public bool IsMoving()
+    private void MoveToLastCheckpoint()
+    {
+		transform.position = new Vector2(m_LastCheckPointPosition.x, m_LastCheckPointPosition.y);
+	}
+
+	public bool IsMoving()
 	{
-		return (m_Rigidbody2D.velocity.x > 0.1f);
+		return m_Rigidbody2D.velocity.x > 0.1f;
 	}
 
 	public bool IsGrounded()
