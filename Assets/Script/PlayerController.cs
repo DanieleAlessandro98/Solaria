@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
 	private float m_CurrentRunSpeed;
 	private float m_CurrentSmoothVelocity;
 	private Health m_Health;
-	private Vector2 m_LastCheckPointPosition;
 
 	[SerializeField]
 	private Rigidbody2D m_Rigidbody2D;
@@ -51,7 +50,9 @@ public class PlayerController : MonoBehaviour
 		m_Speed = Vector2.zero;
 		m_CurrentRunSpeed = 0f;
 		m_CurrentSmoothVelocity = 0f;
-		m_LastCheckPointPosition = Vector2.zero;
+
+		if (GameManager.Singleton.IsValidLastCheckPointPosition())
+			MoveToLastCheckpoint();
 
 		SetCoinsText();
 	}
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     public void SaveLastCheckPointPosition()
     {
-		m_LastCheckPointPosition = new Vector2(transform.position.x, transform.position.y);
+		GameDataManager.Singleton.SetLastCheckPointPosition(new Vector2(transform.position.x, transform.position.y));
 	}
 
 	private void StopMove()
@@ -168,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveToLastCheckpoint()
     {
-		transform.position = new Vector2(m_LastCheckPointPosition.x, m_LastCheckPointPosition.y);
+		transform.position = GameDataManager.Singleton.GetLastCheckPointPosition();
 	}
 
 	public bool IsMoving()

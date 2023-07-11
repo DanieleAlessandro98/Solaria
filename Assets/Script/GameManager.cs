@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
         GameDataManager.Singleton.IncrementCoins();
     }
 
+    public bool IsValidLastCheckPointPosition()
+    {
+        return GameDataManager.Singleton.GetLastCheckPointPosition() != Vector2.zero;
+    }
+
     public void Dead()
     {
         GameDataManager.Singleton.ResetSessionData();

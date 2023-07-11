@@ -58,6 +58,16 @@ public class GameDataManager : MonoBehaviour
         m_PlayerSessionData.SetCoins(m_PlayerSessionData.GetCoins() + 1);
     }
 
+    public void SetLastCheckPointPosition(Vector2 lastCheckPointPosition)
+    {
+        m_PlayerSessionData.SetLastCheckPointPosition(lastCheckPointPosition);
+    }
+
+    public Vector2 GetLastCheckPointPosition()
+    {
+        return m_PlayerSessionData.GetLastCheckPointPosition();
+    }
+
     public void ResetSessionData()
     {
         m_PlayerSessionData = m_PlayerLevelData;
