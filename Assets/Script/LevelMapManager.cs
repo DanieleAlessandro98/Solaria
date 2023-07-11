@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelMapManager : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class LevelMapManager : MonoBehaviour
     void Start()
     {
         HideAll();
+        StartCoroutine(WaitForShowLevel());
     }
 
     private void HideAll()
@@ -58,14 +60,28 @@ public class LevelMapManager : MonoBehaviour
         m_PaperPlayButton.SetActive(false);
     }
 
-    public void ShowLevelMap(int level)
+    private IEnumerator WaitForShowLevel()
     {
+        yield return new WaitForEndOfFrame();
+
+        ShowLevelMap();
+    }
+
+    public void ShowLevelMap()
+    {
+        int level = GameDataManager.Singleton.GetLevel();
+
         m_CharacterSpriteLevel[level].SetActive(true);
         m_PaperImage.SetActive(true);
         m_PaperLevelNameImage[level].SetActive(true);
         m_PaperInfoText.SetActive(true);
 
         TextManager.LoadPaperInfoText(m_PaperInfoText, findLevelFileName(level), WriterEffectCompletedCallback);
+    }
+
+    public void StartLevel()
+    {
+        SceneManager.LoadScene("GameLevel" + GameDataManager.Singleton.GetLevel());
     }
 
     private string findLevelFileName(int level)

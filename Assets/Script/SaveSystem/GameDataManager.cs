@@ -76,6 +76,9 @@ public class GameDataManager : MonoBehaviour
 
     public void SetLevelData()
     {
+        m_PlayerSessionData.SetLevel(m_PlayerSessionData.GetLevel() + 1);
+        m_PlayerSessionData.SetLastCheckPointPosition(Vector2.zero);
+
         m_PlayerLevelData = m_PlayerSessionData;
         Save(ESaveType.LEVEL);
     }

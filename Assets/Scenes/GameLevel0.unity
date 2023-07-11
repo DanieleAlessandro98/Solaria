@@ -2118,7 +2118,7 @@ MonoBehaviour:
   m_Animator: {fileID: 1998423498}
   m_Player: {fileID: 130523329}
   m_HealthBoard: {fileID: 559482944}
-  m_MaxHealth: 5
+  m_MaxHealth: 100
   m_IsFollowPlayer: 1
   m_InitialSpawnPositionRange: 10
   m_PlayerFollowRange: 5
