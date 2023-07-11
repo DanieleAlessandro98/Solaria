@@ -211,7 +211,7 @@ public class EnemyController : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
         if (m_IsFinalBoss)
-            GameManager.Singleton.LevelFinished();
+            GameManager.Singleton.Win();
 
         Invoke("EntityDied", DELAY_ENTITY_DIED);
     }

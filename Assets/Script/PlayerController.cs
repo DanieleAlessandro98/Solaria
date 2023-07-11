@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 //TODO: Inserire classe "Player" che gestisce il controller, la vita, il danno (ed altro(?))
@@ -36,6 +37,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private int m_Damage;
 
+	[SerializeField]
+	private TextMeshProUGUI m_CoinsText;
+
 	void Awake()
 	{
 		m_Health = new Health(MAX_HEALTH);
@@ -48,6 +52,8 @@ public class PlayerController : MonoBehaviour
 		m_CurrentRunSpeed = 0f;
 		m_CurrentSmoothVelocity = 0f;
 		m_LastCheckPointPosition = Vector2.zero;
+
+		SetCoinsText();
 	}
 
 	// Update is called once per frame
@@ -189,4 +195,9 @@ public class PlayerController : MonoBehaviour
     {
 		return transform.position.x;
     }
+
+	public void SetCoinsText()
+	{
+		m_CoinsText.text = GameDataManager.Singleton.GetCoins().ToString();
+	}
 }
