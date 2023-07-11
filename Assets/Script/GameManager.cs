@@ -7,16 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static readonly int FIRST_LEVEL = 0;
+    public static readonly int FIRST_COIN = 0;
+
     private readonly float NEXT_LEVEL_DIALOG = 3f;
 
     private static GameManager m_Singleton;
 
     private bool m_IsDead;
-    private int m_Coins;
-    private int m_CurrentLevel;
 
-    //[SerializeField]
-    //private TextMeshProUGUI m_CoinsText;
+    [SerializeField]
+    private TextMeshProUGUI m_CoinsText;
 
     public static GameManager Singleton
     {
@@ -40,9 +41,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadData();
         SetDead(false);
         SetCoinsText();
+    }
+
+    void OnApplicationQuit()
+    {
+        GameDataManager.Singleton.SavePlayerData();
     }
 
     public void SetDead(bool isDead)
@@ -57,36 +62,24 @@ public class GameManager : MonoBehaviour
 
     public void Dead()
     {
+        GameDataManager.Singleton.ResetSessionData();
         SceneManager.LoadScene("DiedScene");    //TODO: Gestire la morte del pg
-    }
-
-    private void SaveData()
-    {
-        GameDataManager.Singleton.SavePlayerData(m_CurrentLevel, m_Coins);
-    }
-
-    private void LoadData()
-    {
-        m_Coins = GameDataManager.Singleton.GetCurrentCoins();
-        m_CurrentLevel = GameDataManager.Singleton.GetCurrentLevel();
     }
 
     public void CollectCoin()
     {
-        m_Coins++;
+        GameDataManager.Singleton.IncrementCoins();
         SetCoinsText();
     }
 
     private void SetCoinsText()
     {
-        //m_CoinsText.text = m_Coins.ToString();
+        m_CoinsText.text = GameDataManager.Singleton.GetCoins().ToString();
     }
 
     public void LevelFinished()
     {
-        m_CurrentLevel++;
-        SaveData();
-
+        GameDataManager.Singleton.SetLevelData();
         StartCoroutine(StartEndLevelDialog());
     }
 
@@ -94,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(NEXT_LEVEL_DIALOG);
 
-        DialogManager.Singleton.StartEndLevelDialog(m_CurrentLevel);
+        DialogManager.Singleton.StartEndLevelDialog(GameDataManager.Singleton.GetLevel());
         StartCoroutine(WaitUntilEndLevelDialogIsOpen());
     }
 
@@ -102,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(() => !DialogManager.Singleton.IsDialogOpen());
 
-        if ((m_CurrentLevel - 1) == 0)
+        if ((GameDataManager.Singleton.GetLevel() - 1) == 0)
             SceneManager.LoadScene("FutureVisionScene");
         else
             NextLevel();

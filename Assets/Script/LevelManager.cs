@@ -58,14 +58,10 @@ public class LevelManager : MonoBehaviour
         return m_CurrentLevel;
     }
 
-    //TODO: SaveData e LoadData in interfaccia
-    private void SaveData()
-    {
-        GameDataManager.Singleton.SavePlayerData(m_CurrentLevel, GameDataManager.NOT_INCLUDED_IN_SAVE);
-    }
+    //TODO: SaveData e LoadData in interfaccia?
 
     private void LoadData()
     {
-        m_CurrentLevel = GameDataManager.Singleton.GetCurrentLevel();
+        m_CurrentLevel = GameDataManager.Singleton.GetLevel();
     }
 }

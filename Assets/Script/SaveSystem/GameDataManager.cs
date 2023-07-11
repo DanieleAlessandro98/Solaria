@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -6,17 +7,17 @@ using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
 {
+    private const string SAVE_PATH = "SavedData";
+
+    private const string SAVE_LEVEL_FILE = "level_data";
+    private static string LEVEL_PATH = Path.Combine(Path.Combine(Application.streamingAssetsPath, SAVE_PATH), SAVE_LEVEL_FILE);
+    private const string SAVE_SESSION_FILE = "session_data";
+    private static string SESSION_PATH = Path.Combine(Path.Combine(Application.streamingAssetsPath, SAVE_PATH), SAVE_SESSION_FILE);
+
     private static GameDataManager m_Singleton;
 
-    private const string SAVE_PATH = "SavedData";
-    private const string SAVE_FILE = "data";
-    private static string PATH = Path.Combine(Path.Combine(Application.streamingAssetsPath, SAVE_PATH), SAVE_FILE);
-
-    public static readonly int NOT_INCLUDED_IN_SAVE = -1;
-    public static readonly int FIRST_LEVEL = 0;
-    public static readonly int FIRST_COIN = 0;
-
-    private PlayerData m_PlayerData;
+    private PlayerData m_PlayerLevelData;
+    private PlayerData m_PlayerSessionData;
 
     public static GameDataManager Singleton
     {
@@ -37,48 +38,108 @@ public class GameDataManager : MonoBehaviour
         m_Singleton = this;
 
         DontDestroyOnLoad(gameObject);
-        LoadPlayerData();
+
+        Load(ESaveType.LEVEL);
+        Load(ESaveType.SESSION);
     }
 
-    public void SavePlayerData(int level, int coins)
+    public int GetLevel()
     {
-        if (level != NOT_INCLUDED_IN_SAVE)
-            m_PlayerData.SetLevel(level);
+        return m_PlayerSessionData.GetLevel();
+    }
 
-        if (coins != NOT_INCLUDED_IN_SAVE)
-            m_PlayerData.SetCoins(coins);
+    public int GetCoins()
+    {
+        return m_PlayerSessionData.GetCoins();
+    }
 
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream fileStream = new FileStream(PATH, FileMode.Create);
+    public void IncrementCoins()
+    {
+        m_PlayerSessionData.SetCoins(m_PlayerSessionData.GetCoins() + 1);
+    }
 
-        binaryFormatter.Serialize(fileStream, m_PlayerData);
-        fileStream.Close();
+    public void ResetSessionData()
+    {
+        m_PlayerSessionData = m_PlayerLevelData;
+        Save(ESaveType.SESSION);
+    }
+
+    public void SetLevelData()
+    {
+        m_PlayerLevelData = m_PlayerSessionData;
+        Save(ESaveType.LEVEL);
+    }
+
+    public void SavePlayerData()
+    {
+        Save(ESaveType.SESSION);
     }
 
     public void LoadPlayerData()
     {
-        if (File.Exists(PATH))
+        Load(ESaveType.SESSION);
+    }
+
+    private void Save(ESaveType saveType)
+    {
+        string path = FindPath(saveType);
+        ref PlayerData playerData = ref FindPlayerData(saveType);
+
+        if (!IsValidPath(path))
+            return;
+
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream fileStream = new FileStream(path, FileMode.Create);
+
+        binaryFormatter.Serialize(fileStream, playerData);
+        fileStream.Close();
+    }
+
+    private void Load(ESaveType saveType)
+    {
+        string path = FindPath(saveType);
+        ref PlayerData playerData = ref FindPlayerData(saveType);
+
+        if (!IsValidPath(path))
+            return;
+
+        if (File.Exists(path))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream(PATH, FileMode.Open);
+            FileStream fileStream = new FileStream(path, FileMode.Open);
 
-            m_PlayerData = (PlayerData)binaryFormatter.Deserialize(fileStream);
+            playerData = (PlayerData)binaryFormatter.Deserialize(fileStream);
             fileStream.Close();
         }
         else
         {
-            m_PlayerData = new PlayerData(FIRST_LEVEL, FIRST_COIN);
-            SavePlayerData(NOT_INCLUDED_IN_SAVE, NOT_INCLUDED_IN_SAVE);
+            playerData = new PlayerData(GameManager.FIRST_LEVEL, GameManager.FIRST_COIN);
+            Save(saveType);
         }
     }
 
-    public int GetCurrentLevel()
+    private string FindPath(ESaveType saveType)
     {
-        return m_PlayerData.GetLevel();
+        string path;
+        if (saveType == ESaveType.LEVEL)
+            path = LEVEL_PATH;
+        else
+            path = SESSION_PATH;
+
+        return path;
     }
 
-    public int GetCurrentCoins()
+    private ref PlayerData FindPlayerData(ESaveType saveType)
     {
-        return m_PlayerData.GetCoins();
+        if (saveType == ESaveType.LEVEL)
+            return ref m_PlayerLevelData;
+        else
+            return ref m_PlayerSessionData;
     }
+
+    private bool IsValidPath(string path)
+    {
+        return path != "";
+    }
+
 }

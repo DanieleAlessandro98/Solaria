@@ -52,6 +52,6 @@ public class DiedManager : MonoBehaviour
 
     private void LoadData()
     {
-        m_CurrentLevel = GameDataManager.Singleton.GetCurrentLevel();
+        m_CurrentLevel = GameDataManager.Singleton.GetLevel();
     }
 }
