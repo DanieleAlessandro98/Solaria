@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DiedScene.unity
     guid: f437617f8b576844e9542c66f9abf442
+  - enabled: 1
+    path: Assets/Scenes/FutureVisionScene.unity
+    guid: 6679630b4fa7e3f4c89d35a94e89adce
   m_configObjects: {}

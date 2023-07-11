@@ -2117,13 +2117,14 @@ MonoBehaviour:
   m_Animator: {fileID: 1998423498}
   m_Player: {fileID: 130523329}
   m_HealthBoard: {fileID: 559482944}
-  m_MaxHealth: 100
+  m_MaxHealth: 5
   m_IsFollowPlayer: 1
   m_InitialSpawnPositionRange: 10
   m_PlayerFollowRange: 5
   m_AttackRange: 0.9
   m_AttackDelay: 2
   m_MovementSpeed: 2
+  m_IsFinalBoss: 1
 --- !u!50 &337470536
 Rigidbody2D:
   serializedVersion: 4
@@ -5288,11 +5289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.1
+      value: 236.2
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2690285575454598972, guid: ca079343dddced44593f13ba71590972, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7435,6 +7436,7 @@ MonoBehaviour:
   m_AttackRange: 0.9
   m_AttackDelay: 2
   m_MovementSpeed: 2
+  m_IsFinalBoss: 0
 --- !u!1 &1333887308
 GameObject:
   m_ObjectHideFlags: 0
@@ -9732,7 +9734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4591c22cbb74546a2e850f719ff751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CoinsText: {fileID: 1325516090}
 --- !u!4 &1758345924
 Transform:
   m_ObjectHideFlags: 0

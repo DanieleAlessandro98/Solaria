@@ -45,6 +45,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float m_MovementSpeed = 2f;
 
+    [SerializeField]
+    private bool m_IsFinalBoss;
+
     void Awake()
     {
         m_Health = new Health(m_MaxHealth);
@@ -206,6 +209,10 @@ public class EnemyController : MonoBehaviour
     {
         m_Animator.SetInteger("State", 9);
         GetComponent<Collider2D>().enabled = false;
+
+        if (m_IsFinalBoss)
+            GameManager.Singleton.LevelFinished();
+
         Invoke("EntityDied", DELAY_ENTITY_DIED);
     }
 

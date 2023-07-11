@@ -7,13 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private readonly float NEXT_LEVEL_DIALOG = 3f;
+
     private static GameManager m_Singleton;
 
     private bool m_IsDead;
     private int m_Coins;
+    private int m_CurrentLevel;
 
-    [SerializeField]
-    private TextMeshProUGUI m_CoinsText;
+    //[SerializeField]
+    //private TextMeshProUGUI m_CoinsText;
 
     public static GameManager Singleton
     {
@@ -59,23 +62,54 @@ public class GameManager : MonoBehaviour
 
     private void SaveData()
     {
-        GameDataManager.Singleton.SavePlayerData(GameDataManager.NOT_INCLUDED_IN_SAVE, m_Coins);
+        GameDataManager.Singleton.SavePlayerData(m_CurrentLevel, m_Coins);
     }
 
     private void LoadData()
     {
         m_Coins = GameDataManager.Singleton.GetCurrentCoins();
+        m_CurrentLevel = GameDataManager.Singleton.GetCurrentLevel();
     }
 
     public void CollectCoin()
     {
         m_Coins++;
         SetCoinsText();
-        SaveData();
     }
 
     private void SetCoinsText()
     {
-        m_CoinsText.text = m_Coins.ToString();
+        //m_CoinsText.text = m_Coins.ToString();
+    }
+
+    public void LevelFinished()
+    {
+        m_CurrentLevel++;
+        SaveData();
+
+        StartCoroutine(StartEndLevelDialog());
+    }
+
+    private IEnumerator StartEndLevelDialog()
+    {
+        yield return new WaitForSeconds(NEXT_LEVEL_DIALOG);
+
+        DialogManager.Singleton.StartEndLevelDialog(m_CurrentLevel);
+        StartCoroutine(WaitUntilEndLevelDialogIsOpen());
+    }
+
+    private IEnumerator WaitUntilEndLevelDialogIsOpen()
+    {
+        yield return new WaitUntil(() => !DialogManager.Singleton.IsDialogOpen());
+
+        if ((m_CurrentLevel - 1) == 0)
+            SceneManager.LoadScene("FutureVisionScene");
+        else
+            NextLevel();
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("LevelScene");
     }
 }

@@ -84,4 +84,12 @@ public class DialogManager : MonoBehaviour
         m_DialogCanvas.SetActive(false);
         m_DialogCloseButton.SetActive(false);
     }
+
+    public void StartEndLevelDialog(int m_CurrentLevel)
+    {
+        m_CurrentLevel--;
+
+        if (m_CurrentLevel == 0)
+            StartDialog(EDialogName.Level0_EndLevel);
+    }
 }

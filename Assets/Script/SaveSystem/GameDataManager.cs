@@ -66,7 +66,10 @@ public class GameDataManager : MonoBehaviour
             fileStream.Close();
         }
         else
+        {
             m_PlayerData = new PlayerData(FIRST_LEVEL, FIRST_COIN);
+            SavePlayerData(NOT_INCLUDED_IN_SAVE, NOT_INCLUDED_IN_SAVE);
+        }
     }
 
     public int GetCurrentLevel()
