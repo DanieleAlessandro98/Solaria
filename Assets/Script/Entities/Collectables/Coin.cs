@@ -12,7 +12,7 @@ public class Coin : MonoBehaviour
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		//TODO: invece di PlayerController implementare una abstract class/interface
-		PlayerController player = other.GetComponent<PlayerController>();
+		Player player = other.GetComponent<Player>();
 		if (player)
 		{
 			Collect();
@@ -22,7 +22,7 @@ public class Coin : MonoBehaviour
 
 	public void OnCollisionEnter2D(Collision2D collision2D)
 	{
-		PlayerController player = collision2D.collider.GetComponent<PlayerController>();
+		Player player = collision2D.collider.GetComponent<Player>();
 		if (player)
 		{
 			Collect();

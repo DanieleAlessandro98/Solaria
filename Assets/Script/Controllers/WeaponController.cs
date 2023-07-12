@@ -9,9 +9,6 @@ public class WeaponController : MonoBehaviour
     // -- IsAttacking() ereditato in qualche modo sia da enemy sia da player
     // --  character.EnemyHit(); e enemy.PlayerHit(); generalizzare
 
-    //TODO: Mettere nomi statici di queste animazioni da qualche parte (ad esempio anche per "State" e "ChargeAttack2H" in EnemyController)
-    private const string ENEMY_ATTACK_ANIMATION = "ChargeAttack2H";
-
     [SerializeField]
     private Animator m_Animator;
 
@@ -20,31 +17,23 @@ public class WeaponController : MonoBehaviour
         if (other.CompareTag("GroundChecker") || other.CompareTag("Ground"))
             return;
 
-        if (gameObject.CompareTag("Character"))
+        Entity entity1 = GetComponent<Entity>();
+        Entity entity2 = other.GetComponent<Entity>();
+
+        if (entity1 && entity2)
         {
-            EnemyController enemy = other.GetComponent<EnemyController>();
-            if (enemy)
+            if (entity1.IsPlayer() && !entity2.IsPlayer())
             {
-                if (IsAttacking())
-                    enemy.PlayerHit(GetComponent<PlayerController>().GetDamage());
+                if (entity1.IsAttacking())
+                    entity2.RecvHit(GetComponent<Entity>().GetDamage());
             }
-        }
-        else if (gameObject.CompareTag("Enemy"))
-        {
-            //TODO: invece di PlayerController implementare una abstract class/interface
-            PlayerController player = other.GetComponent<PlayerController>();
-            if (player)
+            else if (!entity1.IsPlayer() && entity2.IsPlayer())
             {
                 AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
 
-                if (IsAttacking() && (stateInfo.IsName(ENEMY_ATTACK_ANIMATION) && stateInfo.normalizedTime < 1f))
-                    player.EnemyHit(GetComponent<EnemyController>().GetDamage());
+                if (entity1.IsAttacking())
+                    entity2.RecvHit(GetComponent<Entity>().GetDamage());
             }
         }
-    }
-
-    private bool IsAttacking()
-    {
-        return m_Animator.GetBool("isAttacking");
     }
 }

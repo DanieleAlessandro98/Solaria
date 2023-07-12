@@ -27,10 +27,10 @@ public class Saw : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision2D)
 	{
-		//TODO: invece di PlayerController implementare una abstract class/interface
-		PlayerController player = collision2D.collider.GetComponent<PlayerController>();
-		if (player)
-            player.EnemyHit(GetComponent<Saw>().GetDamage(), true);
+        //TODO: invece di PlayerController implementare una abstract class/interface
+        Entity entity = collision2D.collider.GetComponent<Entity>();
+		if (entity  && entity.IsPlayer())
+            entity.RecvHit(GetComponent<Saw>().GetDamage(), true);
     }
 
     public int GetDamage()

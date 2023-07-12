@@ -4,28 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //TODO: Inserire classe "Enemy" che gestisce il controller, la vita, il danno (ed altro(?))
-public class EnemyController : MonoBehaviour
+internal class EnemyController : MonoBehaviour, EntityControllerInterface
 {
     private const float DISTANCE_TOLERANCE = 0.1f;
-    private const int DAMAGE_TO_PLAYER = 1;
-    private readonly float DELAY_ENTITY_DIED = 3f;
 
+    //TODO: Mettere nomi statici di queste animazioni da qualche parte (ad esempio anche per "State" e "ChargeAttack2H" in EnemyController)
+    private const string ENEMY_ATTACK_ANIMATION = "ChargeAttack2H";
+
+    private Enemy enemy;
     private Vector3 m_SpawnPosition;
     private EEnemyState m_CurrentState;
     private bool m_IsAttacking;
-    private Health m_Health;
-
-    [SerializeField]
     private Animator m_Animator;
 
     [SerializeField]
-    private PlayerController m_Player;
-
-    [SerializeField]
-    private HealthEnemyBoard m_HealthBoard;
-
-    [SerializeField]
-    private int m_MaxHealth;
+    private Player m_Player;
 
     [SerializeField]
     private bool m_IsFollowPlayer;
@@ -45,22 +38,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float m_MovementSpeed = 2f;
 
-    [SerializeField]
-    private bool m_IsFinalBoss;
-
-    void Awake()
-    {
-        m_Health = new Health(m_MaxHealth);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        enemy = GetComponent<Enemy>();
+        m_Animator = GetComponentInChildren<Animator>();
+
         m_SpawnPosition = transform.position;
         m_CurrentState = EEnemyState.SpawnPosition;
         m_IsAttacking = false;
-
-        SetHealth(0);
     }
 
     // Update is called once per frame
@@ -96,7 +82,7 @@ public class EnemyController : MonoBehaviour
                         {
                             m_CurrentState = EEnemyState.Attack;
 
-                            if (IsAlive() && m_Player.IsAlive())
+                            if (enemy.IsAlive() && m_Player.IsAlive())
                                 StartCoroutine(AttackCoroutine());
                         }
                     }
@@ -122,21 +108,39 @@ public class EnemyController : MonoBehaviour
                 }
                 break;
         }
-
-        m_HealthBoard.SetRotation(transform.localScale.x);
     }
 
-    public void PlayerHit(int damage)
+    public void Move(float horizontalAxis)
     {
-        if (!IsAlive())
-            return;
+        Vector3 targetPosition = new Vector3(horizontalAxis, transform.position.y, transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, m_MovementSpeed * Time.deltaTime);
 
-        SetHealth(damage);
+        transform.localScale = findDirection(horizontalAxis);
+    }
+
+    public void Jump()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Attack()
+    {
+        StartCoroutine(AttackCoroutine());
+    }
+
+    public void HitAnimation()
+    {
+        m_Animator.SetTrigger("Hit");
+    }
+
+    public void DieAnimation()
+    {
+        m_Animator.SetInteger("State", 9);
     }
 
     private void MoveToSpawnPosition()
     {
-        if (!IsAlive())
+        if (!enemy.IsAlive())
             return;
 
         m_Animator.SetInteger("State", 2);
@@ -145,19 +149,11 @@ public class EnemyController : MonoBehaviour
 
     private void MoveToPlayerPosition()
     {
-        if (!IsAlive())
+        if (!enemy.IsAlive())
             return;
 
         m_Animator.SetInteger("State", 2);
         Move(m_Player.GetPositionX());
-    }
-
-    private void Move(float targetX)
-    {
-        Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, m_MovementSpeed * Time.deltaTime);
-
-        transform.localScale = findDirection(targetX);
     }
 
     private Vector3 findDirection(float targetX)
@@ -184,40 +180,9 @@ public class EnemyController : MonoBehaviour
         return distance < DISTANCE_TOLERANCE;
     }
 
-    private void SetHealth(int damage)
+    public bool IsAttacking()
     {
-        m_Health.SetCurrentHealth(damage);
-        m_HealthBoard.SetHealth(m_Health.GetCurrentHealth(), m_Health.GetMaxHealth(), m_Health.CalcCurrentHealthPct());
-
-        if (IsAlive())
-            m_Animator.SetTrigger("Hit");
-        else
-            Die();
-    }
-
-    public int GetDamage()
-    {
-        return DAMAGE_TO_PLAYER;
-    }
-
-    public bool IsAlive()
-    {
-        return m_Health.IsAlive();
-    }
-
-    public void Die()
-    {
-        m_Animator.SetInteger("State", 9);
-        GetComponent<Collider2D>().enabled = false;
-
-        if (m_IsFinalBoss)
-            GameManager.Singleton.Win();
-
-        Invoke("EntityDied", DELAY_ENTITY_DIED);
-    }
-
-    private void EntityDied()
-    {
-        Destroy(gameObject);
+        AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
+        return m_Animator.GetBool("isAttacking") && (stateInfo.IsName(ENEMY_ATTACK_ANIMATION) && stateInfo.normalizedTime < 1f);
     }
 }

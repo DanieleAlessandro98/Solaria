@@ -22,11 +22,6 @@ public class Health
         currentHealth -= damage;
     }
 
-    public float CalcCurrentHealthPct()
-    {
-        return (float)currentHealth / maxHealth;
-    }
-
     public int GetCurrentHealth()
     {
         return currentHealth;
@@ -42,9 +37,13 @@ public class Health
         return currentHealth > 0;
     }
 
+    public static float CalcCurrentHealthPct(int currentHealth, int maxHealth)
+    {
+        return (float)currentHealth / maxHealth;
+    }
+
     public static string GetHealthFormatting(int currentHealth, int maxHealth)
     {
         return currentHealth + "/" + maxHealth + " HP";
     }
-
 }

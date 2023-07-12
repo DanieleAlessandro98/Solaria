@@ -8,9 +8,9 @@ public class Spike : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
-        PlayerController player = otherCollider.GetComponent<PlayerController>();
-        if (player)
-            player.EnemyHit(GetComponent<Spike>().GetDamage(), true);
+        Entity entity = otherCollider.GetComponent<Entity>();
+        if (entity && entity.IsPlayer())
+            entity.RecvHit(GetComponent<Spike>().GetDamage(), true);
     }
 
     public int GetDamage()

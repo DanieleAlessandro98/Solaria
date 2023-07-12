@@ -5,56 +5,33 @@ using TMPro;
 using UnityEngine;
 
 //TODO: Inserire classe "Player" che gestisce il controller, la vita, il danno (ed altro(?))
-public class PlayerController : MonoBehaviour
+internal class PlayerController : MonoBehaviour, EntityControllerInterface
 {
 	private const float MAX_RUN_SPEED = 8f;
 	private const float RUN_SPEED = 5f;
 	private const float RUN_SMOOTH_TIME = 5f;
-	private const int MAX_HEALTH = 3;
-	private readonly float DELAY_ENTITY_DIED = 3f;
 
 	private Vector2 m_Speed;
 	private float m_CurrentRunSpeed;
 	private float m_CurrentSmoothVelocity;
-	private Health m_Health;
-
-	[SerializeField]
 	private Rigidbody2D m_Rigidbody2D;
-
-	[SerializeField]
 	private Animator m_Animator;
 
 	[SerializeField]
-	private GroundChecker m_GroundChecker;
+    private GroundChecker m_GroundChecker;
 
 	[SerializeField]
 	private float m_JumpStrength = 0.1f;
 
-	[SerializeField]
-	private HealthPlayerBoard m_HealthBoard;
-
-	[SerializeField]
-	private int m_Damage;
-
-	[SerializeField]
-	private TextMeshProUGUI m_CoinsText;
-
-	void Awake()
+    // Start is called before the first frame update
+    void Start()
 	{
-		m_Health = new Health(MAX_HEALTH);
-	}
+		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		m_Animator = GetComponent<Animator>();
 
-	// Start is called before the first frame update
-	void Start()
-	{
 		m_Speed = Vector2.zero;
 		m_CurrentRunSpeed = 0f;
 		m_CurrentSmoothVelocity = 0f;
-
-		if (GameManager.Singleton.IsValidLastCheckPointPosition())
-			MoveToLastCheckpoint();
-
-		SetCoinsText();
 	}
 
 	// Update is called once per frame
@@ -68,34 +45,22 @@ public class PlayerController : MonoBehaviour
 		if (m_Speed.x >= RUN_SPEED)
 			m_CurrentRunSpeed = Mathf.SmoothDamp(m_Speed.x, MAX_RUN_SPEED, ref m_CurrentSmoothVelocity, RUN_SMOOTH_TIME);
 
-		if (Input.GetMouseButtonDown(0))
-			Attack();
-
-		if (Input.GetButtonDown("Jump"))
-			Jump();
-
 		if (DialogManager.Singleton.IsDialogOpen())
 			StopMove();
 		else
 			Move(Input.GetAxis("Horizontal"));
 
+		if (Input.GetButtonDown("Jump"))
+			Jump();
+
+		if (Input.GetMouseButtonDown(0))
+			Attack();
+
 		m_Animator.SetFloat("Speed", m_Speed.x);
 		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
 	}
 
-    public void SaveLastCheckPointPosition()
-    {
-		GameDataManager.Singleton.SetLastCheckPointPosition(new Vector2(transform.position.x, transform.position.y));
-	}
-
-	private void StopMove()
-	{
-		Vector2 velocity = m_Rigidbody2D.velocity;
-		velocity.x = 0f;
-		m_Rigidbody2D.velocity = velocity;
-	}
-	
-	private void Move(float horizontalAxis)
+	public void Move(float horizontalAxis)
 	{
 		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
@@ -121,16 +86,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void Attack()
-	{
-		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
-        {
-			if (!IsAttacking() && !IsMoving() && IsGrounded())
-				m_Animator.SetTrigger("Attack");
-		}
-	}
-
-	private void Jump()
+	public void Jump()
 	{
 		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
@@ -146,76 +102,49 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	public void Die(bool isResetPosition)
+	public void Attack()
 	{
-		GameManager.Singleton.SetDead(true);
-		Invoke("EntityDied", isResetPosition ? 0f : DELAY_ENTITY_DIED);
-	}
-
-	private void EntityDied()
-    {
-		GameManager.Singleton.Dead();
-	}
-
-	public void EnemyHit(int damage, bool isResetPosition = false)
-	{
-		m_Health.SetCurrentHealth(damage);
-		m_HealthBoard.SetHealth(m_Health.CalcCurrentHealthPct());
-
-		if (IsAlive())
-        {
-			if (isResetPosition)
-            {
-				StopMove();
-				MoveToLastCheckpoint();
-			}
-			else
-				m_Animator.SetTrigger("Hit");   //TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
-		}
-		else
-        {
-			m_Animator.SetTrigger("Die");
-			Die(isResetPosition);
+		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
+		{
+			if (!IsAttacking() && !IsMoving() && IsGrounded())
+				m_Animator.SetTrigger("Attack");
 		}
 	}
 
-    private void MoveToLastCheckpoint()
-    {
+	public void HitAnimation()
+	{
+		m_Animator.SetTrigger("Hit");   //TODO: Spostare la direzione del personaggio in base all'hit (sinistra o destra)
+	}
+
+	public void DieAnimation()
+	{
+		m_Animator.SetTrigger("Die");
+	}
+
+	public void StopMove()
+	{
+		Vector2 velocity = m_Rigidbody2D.velocity;
+		velocity.x = 0f;
+		m_Rigidbody2D.velocity = velocity;
+	}
+
+	public void MoveToLastCheckpoint()
+	{
 		transform.position = GameDataManager.Singleton.GetLastCheckPointPosition();
 	}
 
-	public bool IsMoving()
+	private bool IsMoving()
 	{
 		return m_Rigidbody2D.velocity.x > 0.1f;
 	}
 
-	public bool IsGrounded()
-    {
+	private bool IsGrounded()
+	{
 		return m_GroundChecker.IsGrounded();
 	}
 
-	public bool IsAlive()
-	{
-		return m_Health.IsAlive();
-	}
-
-	private bool IsAttacking()
+	public bool IsAttacking()
 	{
 		return m_Animator.GetBool("isAttacking");
-	}
-
-	public int GetDamage()
-	{
-		return m_Damage;
-	}
-
-    public float GetPositionX()
-    {
-		return transform.position.x;
-    }
-
-	public void SetCoinsText()
-	{
-		m_CoinsText.text = GameDataManager.Singleton.GetCoins().ToString();
 	}
 }

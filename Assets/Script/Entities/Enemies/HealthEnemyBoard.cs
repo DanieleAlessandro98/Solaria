@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthEnemyBoard : MonoBehaviour
+public class HealthEnemyBoard : MonoBehaviour, HealthGUI
 {
     [SerializeField]
     private RectTransform healthRect;
@@ -11,8 +11,10 @@ public class HealthEnemyBoard : MonoBehaviour
     [SerializeField]
     private Text healthText;
 
-    public void SetHealth(int currentHealth, int maxHealth, float healthPct)
+    public void SetHealth(int currentHealth, int maxHealth)
     {
+        float healthPct = Health.CalcCurrentHealthPct(currentHealth, maxHealth);
+
         healthRect.localScale = new Vector3(healthPct, healthRect.localScale.y, healthRect.localScale.z);
         healthText.text = Health.GetHealthFormatting(currentHealth, maxHealth);
     }

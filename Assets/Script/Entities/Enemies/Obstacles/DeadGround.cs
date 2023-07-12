@@ -8,9 +8,9 @@ public class DeadGround : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D otherCollider)
     {
-        PlayerController player = otherCollider.GetComponent<PlayerController>();
-        if (player)
-            player.EnemyHit(GetComponent<DeadGround>().GetDamage(), true);
+        Entity entity = otherCollider.GetComponent<Entity>();
+        if (entity && entity.IsPlayer())
+            entity.RecvHit(GetComponent<DeadGround>().GetDamage(), true);
     }
 
     public int GetDamage()
