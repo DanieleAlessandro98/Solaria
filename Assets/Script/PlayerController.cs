@@ -68,6 +68,9 @@ public class PlayerController : MonoBehaviour
 		if (m_Speed.x >= RUN_SPEED)
 			m_CurrentRunSpeed = Mathf.SmoothDamp(m_Speed.x, MAX_RUN_SPEED, ref m_CurrentSmoothVelocity, RUN_SMOOTH_TIME);
 
+		if (Input.GetMouseButtonDown(0))
+			Attack();
+
 		if (Input.GetButtonDown("Jump"))
 			Jump();
 
@@ -115,6 +118,15 @@ public class PlayerController : MonoBehaviour
 				transform.localScale = scale;
 			}
 
+		}
+	}
+
+	private void Attack()
+	{
+		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
+        {
+			if (!IsAttacking() && !IsMoving() && IsGrounded())
+				m_Animator.SetTrigger("Attack");
 		}
 	}
 
@@ -185,6 +197,11 @@ public class PlayerController : MonoBehaviour
 	public bool IsAlive()
 	{
 		return m_Health.IsAlive();
+	}
+
+	private bool IsAttacking()
+	{
+		return m_Animator.GetBool("isAttacking");
 	}
 
 	public int GetDamage()
