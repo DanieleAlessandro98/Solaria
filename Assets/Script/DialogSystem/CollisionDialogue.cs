@@ -13,15 +13,15 @@ public class CollisionDialogue : MonoBehaviour
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		//TODO: invece di PlayerController implementare una abstract class/interface
-		PlayerController character = other.GetComponent<PlayerController>();
-		if (character)
+		PlayerController player = other.GetComponent<PlayerController>();
+		if (player)
 			StartDialog();
 	}
 
 	public void OnCollisionEnter2D(Collision2D collision2D)
 	{
-		PlayerController character = collision2D.collider.GetComponent<PlayerController>();
-		if (character)
+		PlayerController player = collision2D.collider.GetComponent<PlayerController>();
+		if (player)
 			StartDialog();
 	}
 

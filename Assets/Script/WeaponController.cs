@@ -32,13 +32,13 @@ public class WeaponController : MonoBehaviour
         else if (gameObject.CompareTag("Enemy"))
         {
             //TODO: invece di PlayerController implementare una abstract class/interface
-            PlayerController character = other.GetComponent<PlayerController>();
-            if (character)
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player)
             {
                 AnimatorStateInfo stateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
 
                 if (IsAttacking() && (stateInfo.IsName(ENEMY_ATTACK_ANIMATION) && stateInfo.normalizedTime < 1f))
-                    character.EnemyHit(GetComponent<EnemyController>().GetDamage());
+                    player.EnemyHit(GetComponent<EnemyController>().GetDamage());
             }
         }
     }
