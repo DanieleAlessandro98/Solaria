@@ -9,10 +9,10 @@ public class PlayerData
     private int coins;
     private SerializableVector2 lastCheckPointPosition;
 
-    public PlayerData(int level, int coins)
+    public PlayerData()
     {
-        this.level = level;
-        this.coins = coins;
+        this.level = GameManager.FIRST_LEVEL;
+        this.coins = GameManager.FIRST_COIN;
         lastCheckPointPosition = new SerializableVector2(Vector2.zero);
     }
 

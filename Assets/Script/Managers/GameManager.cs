@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
 
     public void Dead()
     {
-        GameDataManager.Singleton.ResetSessionData();
         SceneManager.LoadScene("DiedScene");    //TODO: Gestire la morte del pg
     }
 

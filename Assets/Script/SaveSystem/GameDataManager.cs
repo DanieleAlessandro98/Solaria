@@ -70,7 +70,11 @@ public class GameDataManager : MonoBehaviour
 
     public void ResetSessionData()
     {
-        m_PlayerSessionData = m_PlayerLevelData;
+        m_PlayerLevelData.SetLastCheckPointPosition(Vector2.zero);
+
+        m_PlayerSessionData.SetCoins(m_PlayerLevelData.GetCoins());
+        m_PlayerSessionData.SetLevel(m_PlayerLevelData.GetLevel());
+        m_PlayerSessionData.SetLastCheckPointPosition(m_PlayerLevelData.GetLastCheckPointPosition());
         Save(ESaveType.SESSION);
     }
 
@@ -79,7 +83,9 @@ public class GameDataManager : MonoBehaviour
         m_PlayerSessionData.SetLevel(m_PlayerSessionData.GetLevel() + 1);
         m_PlayerSessionData.SetLastCheckPointPosition(Vector2.zero);
 
-        m_PlayerLevelData = m_PlayerSessionData;
+        m_PlayerLevelData.SetCoins(m_PlayerSessionData.GetCoins());
+        m_PlayerLevelData.SetLevel(m_PlayerSessionData.GetLevel());
+        m_PlayerLevelData.SetLastCheckPointPosition(m_PlayerSessionData.GetLastCheckPointPosition());
         Save(ESaveType.LEVEL);
     }
 
@@ -126,7 +132,7 @@ public class GameDataManager : MonoBehaviour
         }
         else
         {
-            playerData = new PlayerData(GameManager.FIRST_LEVEL, GameManager.FIRST_COIN);
+            playerData = new PlayerData();
             Save(saveType);
         }
     }

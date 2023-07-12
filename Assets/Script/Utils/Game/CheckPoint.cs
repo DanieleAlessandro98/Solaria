@@ -8,6 +8,9 @@ public class CheckPoint : MonoBehaviour
     {
         Player player = otherCollider.GetComponent<Player>();
         if (player)
+        {
             player.SaveLastCheckPointPosition();
+            Destroy(gameObject);
+        }
     }
 }

@@ -7,8 +7,6 @@ public class DiedManager : MonoBehaviour
 {
     private static DiedManager m_Singleton;
 
-    private int m_CurrentLevel;
-
     public static DiedManager Singleton
     {
         get
@@ -28,30 +26,19 @@ public class DiedManager : MonoBehaviour
         m_Singleton = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        LoadData();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameDataManager.Singleton.ResetSessionData();
     }
 
     public void TryAgain()
     {
-        SceneManager.LoadScene("GameLevel" + m_CurrentLevel);
+        GameManager.Singleton.SetDead(false);
+        SceneManager.LoadScene("GameLevel" + GameDataManager.Singleton.GetLevel());
     }
 
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    private void LoadData()
-    {
-        m_CurrentLevel = GameDataManager.Singleton.GetLevel();
     }
 }
