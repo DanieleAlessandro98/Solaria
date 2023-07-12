@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    private Health m_Health;
+    protected Health m_Health;
     private HealthGUI m_HealthGUI;
 
     protected void SetHealth(Health health)

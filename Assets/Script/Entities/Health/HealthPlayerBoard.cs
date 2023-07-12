@@ -5,10 +5,9 @@ public class HealthPlayerBoard : MonoBehaviour, HealthGUI
 {
     private Material _material;
 
-    void Start()
+    void Awake()
     {
         _material = GetComponent<Image>().material;
-        SetHealth(1, 1);
     }
 
     public void SetHealth(int currentHealth, int maxHealth)

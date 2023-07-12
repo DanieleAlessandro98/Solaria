@@ -21,7 +21,6 @@ public class Player : Entity, PlayerInterface
 
     private void Awake()
     {
-		SetHealth(new Health(MAX_HEALTH));
 		SetHealthGUI(m_HealthBoard);
 	}
 
@@ -31,6 +30,12 @@ public class Player : Entity, PlayerInterface
 
 		if (GameManager.Singleton.IsValidLastCheckPointPosition())
 			controller.MoveToLastCheckpoint();
+
+		if (!GameManager.Singleton.IsValidHealth())
+			SetHealth(new Health(MAX_HEALTH));
+		else
+			SetHealth(GameDataManager.Singleton.GetHealth());
+		RecvDamage(0);
 
 		SetCoinsText();
 	}
@@ -69,6 +74,7 @@ public class Player : Entity, PlayerInterface
     public override void RecvHit(int damage, bool isResetPosition = false)
     {
 		RecvDamage(damage);
+		GameDataManager.Singleton.SetHealth(m_Health);
 
 		if (IsAlive())
 		{

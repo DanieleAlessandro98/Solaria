@@ -79,6 +79,11 @@ public class GameManager : MonoBehaviour
         return GameDataManager.Singleton.GetLastCheckPointPosition() != Vector2.zero;
     }
 
+    public bool IsValidHealth()
+    {
+        return GameDataManager.Singleton.GetHealth().IsValid();
+    }
+
     public void Dead()
     {
         SceneManager.LoadScene("DiedScene");    //TODO: Gestire la morte del pg

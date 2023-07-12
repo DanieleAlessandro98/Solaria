@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Health
 {
     private int currentHealth;
@@ -35,6 +36,11 @@ public class Health
     public bool IsAlive()
     {
         return currentHealth > 0;
+    }
+
+    public bool IsValid()
+    {
+        return maxHealth != -1 && currentHealth != -1;
     }
 
     public static float CalcCurrentHealthPct(int currentHealth, int maxHealth)

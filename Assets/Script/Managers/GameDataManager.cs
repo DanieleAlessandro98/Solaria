@@ -53,6 +53,16 @@ public class GameDataManager : MonoBehaviour
         return m_PlayerSessionData.GetCoins();
     }
 
+    public Vector2 GetLastCheckPointPosition()
+    {
+        return m_PlayerSessionData.GetLastCheckPointPosition();
+    }
+
+    public Health GetHealth()
+    {
+        return m_PlayerSessionData.GetHealth();
+    }
+
     public void IncrementCoins()
     {
         m_PlayerSessionData.SetCoins(m_PlayerSessionData.GetCoins() + 1);
@@ -63,18 +73,20 @@ public class GameDataManager : MonoBehaviour
         m_PlayerSessionData.SetLastCheckPointPosition(lastCheckPointPosition);
     }
 
-    public Vector2 GetLastCheckPointPosition()
+    public void SetHealth(Health health)
     {
-        return m_PlayerSessionData.GetLastCheckPointPosition();
+        m_PlayerSessionData.SetHealth(health);
     }
 
     public void ResetSessionData()
     {
         m_PlayerLevelData.SetLastCheckPointPosition(Vector2.zero);
+        m_PlayerLevelData.SetHealth(m_PlayerLevelData.InitHealth());
 
-        m_PlayerSessionData.SetCoins(m_PlayerLevelData.GetCoins());
         m_PlayerSessionData.SetLevel(m_PlayerLevelData.GetLevel());
+        m_PlayerSessionData.SetCoins(m_PlayerLevelData.GetCoins());
         m_PlayerSessionData.SetLastCheckPointPosition(m_PlayerLevelData.GetLastCheckPointPosition());
+        m_PlayerSessionData.SetHealth(m_PlayerLevelData.GetHealth());
         Save(ESaveType.SESSION);
     }
 
@@ -82,10 +94,12 @@ public class GameDataManager : MonoBehaviour
     {
         m_PlayerSessionData.SetLevel(m_PlayerSessionData.GetLevel() + 1);
         m_PlayerSessionData.SetLastCheckPointPosition(Vector2.zero);
+        m_PlayerSessionData.SetHealth(m_PlayerSessionData.InitHealth());
 
         m_PlayerLevelData.SetCoins(m_PlayerSessionData.GetCoins());
         m_PlayerLevelData.SetLevel(m_PlayerSessionData.GetLevel());
         m_PlayerLevelData.SetLastCheckPointPosition(m_PlayerSessionData.GetLastCheckPointPosition());
+        m_PlayerLevelData.SetHealth(m_PlayerSessionData.GetHealth());
         Save(ESaveType.LEVEL);
     }
 
