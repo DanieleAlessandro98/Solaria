@@ -47,8 +47,6 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 
 		if (DialogManager.Singleton.IsDialogOpen())
 			StopMove();
-		else
-			Move(Input.GetAxis("Horizontal"));
 
 		if (Input.GetButtonDown("Jump"))
 			Jump();
@@ -58,6 +56,12 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 
 		m_Animator.SetFloat("Speed", m_Speed.x);
 		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
+	}
+
+	void FixedUpdate()
+    {
+		if (!DialogManager.Singleton.IsDialogOpen())
+			Move(Input.GetAxis("Horizontal"));
 	}
 
 	public void Move(float horizontalAxis)
