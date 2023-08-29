@@ -39,4 +39,13 @@ public static class TextManager
         textWriterEffect.writerEffectFinished += callback;
         textWriterEffect.LoadEffect();
     }
+
+    public static void LoadSkillInfoText(GameObject textObject, string fileName)
+    {
+        if (!textObject)
+            return;
+
+        TextFromFile textFromFile = textObject.GetComponent<TextFromFile>();
+        textFromFile.LoadText(fileName, ETextType.Skills);
+    }
 }

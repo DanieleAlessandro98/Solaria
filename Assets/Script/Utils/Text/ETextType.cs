@@ -6,4 +6,5 @@ public enum ETextType
 {
     PaperMap,
     Dialogs,
+    Skills,
 }

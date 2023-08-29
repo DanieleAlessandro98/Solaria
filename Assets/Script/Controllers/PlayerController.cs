@@ -49,7 +49,7 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 			StopMove();
 
 		if (Input.GetButtonDown("Jump"))
-			Jump();
+			Jump(m_JumpStrength);
 
 		if (Input.GetMouseButtonDown(0))
 			Attack();
@@ -90,20 +90,24 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 		}
 	}
 
-	public void Jump()
+	public bool Jump(float jumpStrength)
 	{
 		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
 			if (m_GroundChecker.IsGrounded())
 			{
 				Vector2 velocity = m_Rigidbody2D.velocity;
-				velocity.y = m_JumpStrength;
+				velocity.y = jumpStrength;
 				m_Rigidbody2D.velocity = velocity;
 
 				m_Animator.ResetTrigger("Jump");
 				m_Animator.SetTrigger("Jump");
+
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	public void Attack()

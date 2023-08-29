@@ -118,7 +118,7 @@ internal class EnemyController : MonoBehaviour, EntityControllerInterface
         transform.localScale = findDirection(horizontalAxis);
     }
 
-    public void Jump()
+    public bool Jump(float jumpStrength)
     {
         throw new NotImplementedException();
     }
