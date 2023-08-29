@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 //TODO: Inserire classe "Player" che gestisce il controller, la vita, il danno (ed altro(?))
 internal class PlayerController : MonoBehaviour, EntityControllerInterface
@@ -51,7 +52,7 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 		if (Input.GetButtonDown("Jump"))
 			Jump(m_JumpStrength);
 
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 			Attack();
 
 		m_Animator.SetFloat("Speed", m_Speed.x);
