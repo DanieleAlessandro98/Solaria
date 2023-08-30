@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
         m_IsPlaying = isPlaying;
     }
 
+    //TODO: Rimuovere questi metodi inutili che richiamano solamente GameDataManager. Inserire direttamente il metodo senza passare da GameManager
     public void CollectCoin()
     {
         GameDataManager.Singleton.IncrementCoins();

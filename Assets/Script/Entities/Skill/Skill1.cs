@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class Skill1 : AbstractSkill
 {
     [SerializeField]
+    private GameObject buttonObject;
+
+    [SerializeField]
     private Button button;
 
     [SerializeField]
@@ -13,6 +16,16 @@ public class Skill1 : AbstractSkill
 
     [SerializeField]
     PlayerController player;
+
+    public override ESkillName GetName()
+    {
+        return ESkillName.SKILL1;
+    }
+
+    public override bool CanUseSkill()
+    {
+        return buttonObject.activeSelf && isSkillEnable;
+    }
 
     public override void UseSkill()
     {
@@ -28,9 +41,15 @@ public class Skill1 : AbstractSkill
         return Input.GetKeyDown(KeyCode.F1);
     }
 
-    public override void ChangeSkillState(bool enable)
+    public override void SetUnlockedSkillState(bool unlocked)
     {
-        isSkillEnable = enable;
-        button.interactable = enable;
+        isSkillEnable = unlocked;
+        buttonObject.SetActive(unlocked);
+    }
+
+    public override void SetUsedSkillState(bool used)
+    {
+        isSkillEnable = !used;
+        button.interactable = !used;
     }
 }

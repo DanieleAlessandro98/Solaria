@@ -63,6 +63,11 @@ public class GameDataManager : MonoBehaviour
         return m_PlayerSessionData.GetHealth();
     }
 
+    public bool IsSkillUnlocked(ESkillName skillName)
+    {
+        return m_PlayerSessionData.IsSkillUnlocked(skillName);
+    }
+
     public void IncrementCoins()
     {
         m_PlayerSessionData.SetCoins(m_PlayerSessionData.GetCoins() + 1);
@@ -78,6 +83,11 @@ public class GameDataManager : MonoBehaviour
         m_PlayerSessionData.SetHealth(health);
     }
 
+    public void UnlockSkill(ESkillName skillName)
+    {
+        m_PlayerSessionData.UnlockSkill(skillName);
+    }
+
     public void ResetSessionData()
     {
         m_PlayerLevelData.SetLastCheckPointPosition(Vector2.zero);
@@ -87,6 +97,7 @@ public class GameDataManager : MonoBehaviour
         m_PlayerSessionData.SetCoins(m_PlayerLevelData.GetCoins());
         m_PlayerSessionData.SetLastCheckPointPosition(m_PlayerLevelData.GetLastCheckPointPosition());
         m_PlayerSessionData.SetHealth(m_PlayerLevelData.GetHealth());
+        m_PlayerSessionData.SetSkills(m_PlayerLevelData.GetSkills());
         Save(ESaveType.SESSION);
     }
 
@@ -100,6 +111,7 @@ public class GameDataManager : MonoBehaviour
         m_PlayerLevelData.SetLevel(m_PlayerSessionData.GetLevel());
         m_PlayerLevelData.SetLastCheckPointPosition(m_PlayerSessionData.GetLastCheckPointPosition());
         m_PlayerLevelData.SetHealth(m_PlayerSessionData.GetHealth());
+        m_PlayerLevelData.SetSkills(m_PlayerSessionData.GetSkills());
         Save(ESaveType.LEVEL);
     }
 

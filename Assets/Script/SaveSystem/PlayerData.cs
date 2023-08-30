@@ -9,6 +9,7 @@ public class PlayerData
     private int coins;
     private SerializableVector2 lastCheckPointPosition;
     private Health health;
+    private Dictionary<ESkillName, bool> skills;
 
     public PlayerData()
     {
@@ -16,6 +17,7 @@ public class PlayerData
         this.coins = GameManager.FIRST_COIN;
         lastCheckPointPosition = new SerializableVector2(Vector2.zero);
         health = InitHealth();
+        skills = InitSkills();
     }
 
     public int GetLevel()
@@ -38,6 +40,16 @@ public class PlayerData
         return health;
     }
 
+    public Dictionary<ESkillName, bool> GetSkills()
+    {
+        return skills;
+    }
+
+    public bool IsSkillUnlocked(ESkillName skillName)
+    {
+        return skills.ContainsKey(skillName) && skills[skillName];
+    }
+
     public void SetLevel(int level)
     {
         this.level = level;
@@ -58,8 +70,31 @@ public class PlayerData
         this.health = health;
     }
 
+    public void SetSkills(Dictionary<ESkillName, bool> skills)
+    {
+        this.skills = skills;
+    }
+
+    public void UnlockSkill(ESkillName skillName)
+    {
+        skills[skillName] = true;
+    }
+
     public Health InitHealth()
     {
         return new Health(-1);
+    }
+
+    private Dictionary<ESkillName, bool> InitSkills()
+    {
+        Dictionary<ESkillName, bool> _skills = new Dictionary<ESkillName, bool>();
+
+        foreach (ESkillName skillName in System.Enum.GetValues(typeof(ESkillName)))
+        {
+            if (skillName != ESkillName.NONE)
+                _skills.Add(skillName, false);
+        }
+
+        return _skills;
     }
 }

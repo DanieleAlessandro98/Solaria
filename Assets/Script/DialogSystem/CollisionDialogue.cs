@@ -10,22 +10,36 @@ public class CollisionDialogue : MonoBehaviour
 	[SerializeField]
 	private EDialogName m_DialogName;
 
+	[SerializeField]
+	private bool unlockSkill = false;
+
+	[SerializeField]
+	private ESkillName unlockSkillName = ESkillName.NONE;
+
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		//TODO: invece di PlayerController implementare una abstract class/interface
-		PlayerController player = other.GetComponent<PlayerController>();
-		if (player)
-			StartDialog();
+		HandleCollision(other);
 	}
 
 	public void OnCollisionEnter2D(Collision2D collision2D)
 	{
-		PlayerController player = collision2D.collider.GetComponent<PlayerController>();
-		if (player)
-			StartDialog();
+		HandleCollision(collision2D.collider);
 	}
 
-	public void StartDialog()
+	private void HandleCollision(Collider2D collider)
+    {
+		//TODO: invece di PlayerController implementare una abstract class/interface
+		PlayerController player = collider.GetComponent<PlayerController>();
+		if (player)
+		{
+			StartDialog();
+
+			if (unlockSkill)
+				SkillManager.Singleton.UnlockSkill(unlockSkillName);
+		}
+	}
+
+	private void StartDialog()
 	{
 		DialogManager.Singleton.StartDialog(m_DialogName);
 		m_Collider2D.enabled = false;

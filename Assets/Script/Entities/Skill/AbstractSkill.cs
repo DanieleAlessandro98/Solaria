@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class AbstractSkill : MonoBehaviour
 {
+    protected ESkillName name;
     protected float cooldownTimer;
     protected bool isSkillEnable;
 
@@ -12,18 +13,13 @@ public abstract class AbstractSkill : MonoBehaviour
 
     void Start()
     {
+        name = ESkillName.NONE;
         cooldownTimer = 0f;
         isSkillEnable = true;
     }
-
-    public virtual bool CanUseSkill()
-    {
-        return isSkillEnable;
-    }
-
     protected void StartCooldown()
     {
-        ChangeSkillState(false);
+        SetUsedSkillState(true);
 
         StartCoroutine(CooldownCoroutine());
     }
@@ -32,10 +28,13 @@ public abstract class AbstractSkill : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime);
 
-        ChangeSkillState(true);
+        SetUsedSkillState(false);
     }
 
+    public abstract ESkillName GetName();
+    public abstract bool CanUseSkill();
     public abstract void UseSkill();
     public abstract bool IsSkillKeyDown();
-    public abstract void ChangeSkillState(bool enable);
+    public abstract void SetUnlockedSkillState(bool unlocked);
+    public abstract void SetUsedSkillState(bool used);
 }

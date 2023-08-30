@@ -28,6 +28,18 @@ public class SkillManager : MonoBehaviour
         m_Singleton = this;
     }
 
+    void Start()
+    {
+        if (m_Skills == null || m_Skills.Count < 1)
+            return;
+
+        foreach (AbstractSkill skill in m_Skills)
+        {
+            bool unlocked = GameDataManager.Singleton.IsSkillUnlocked(skill.GetName());
+            skill.SetUnlockedSkillState(unlocked);
+        }
+    }
+
     void Update()
     {
         if (m_Skills == null || m_Skills.Count < 1)
@@ -37,6 +49,18 @@ public class SkillManager : MonoBehaviour
         {
             if (skill.IsSkillKeyDown() && skill.CanUseSkill())
                 skill.UseSkill();
+        }
+    }
+
+    public void UnlockSkill(ESkillName skillName)
+    {
+        foreach (AbstractSkill skill in m_Skills)
+        {
+            if (skill.GetName() == skillName)
+            {
+                GameDataManager.Singleton.UnlockSkill(skillName);
+                skill.SetUnlockedSkillState(true);
+            }
         }
     }
 
