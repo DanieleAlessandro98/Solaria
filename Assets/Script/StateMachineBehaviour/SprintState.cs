@@ -36,6 +36,7 @@ public class SprintState : StateMachineBehaviour
         if (!Active || Time.time - _enterTime < stateInfo.length) return;
 
         Active = false;
+        animator.SetBool("isSprinting", false);
 
         if (Continue == null)
         {
