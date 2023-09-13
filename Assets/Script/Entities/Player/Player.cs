@@ -102,4 +102,9 @@ public class Player : Entity, PlayerInterface
     {
 		return controller.IsAttacking();
 	}
+
+    public void SetCanClimbing(bool canClimb)
+    {
+		controller.SetCanClimbing(canClimb);
+	}
 }

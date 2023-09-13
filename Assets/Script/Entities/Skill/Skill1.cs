@@ -24,7 +24,7 @@ public class Skill1 : AbstractSkill
 
     public override bool CanUseSkill()
     {
-        return buttonObject.activeSelf && isSkillEnable;
+        return buttonObject.activeSelf && isSkillEnable && !SkillManager.Singleton.IsUsingOtherSkills(GetName());
     }
 
     public override void UseSkill()
@@ -51,5 +51,10 @@ public class Skill1 : AbstractSkill
     {
         isSkillEnable = !used;
         button.interactable = !used;
+    }
+
+    public override bool IsUsingSkill()
+    {
+        return !player.IsGrounded();
     }
 }

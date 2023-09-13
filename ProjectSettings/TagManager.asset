@@ -8,6 +8,7 @@ TagManager:
   - Character
   - GroundChecker
   - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

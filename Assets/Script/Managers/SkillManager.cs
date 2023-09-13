@@ -64,4 +64,17 @@ public class SkillManager : MonoBehaviour
         }
     }
 
+    public bool IsUsingOtherSkills(ESkillName skillName)
+    {
+        foreach (AbstractSkill skill in m_Skills)
+        {
+            if (GameDataManager.Singleton.IsSkillUnlocked(skill.GetName()) && skill.GetName() != skillName)
+            {
+                if (skill.IsUsingSkill())
+                    return true;
+            }
+        }
+
+        return false;
+    }
 }

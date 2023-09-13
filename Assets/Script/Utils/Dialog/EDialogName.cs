@@ -13,4 +13,7 @@ public enum EDialogName
     Level0_EndLevel,
     Level0_Vision_Start,
     Level0_Vision_End,
+
+    Level1_Skill,
+    Level1_Climb,
 }

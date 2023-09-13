@@ -21,6 +21,9 @@ public class Health
             return;
 
         currentHealth -= damage;
+
+        if (currentHealth < 0)
+            currentHealth = 0;
     }
 
     public int GetCurrentHealth()

@@ -17,6 +17,9 @@ public static class DialogDictionary
         { EDialogName.Level0_EndLevel,  "Mentore" },
         { EDialogName.Level0_Vision_Start,  "Brann" },
         { EDialogName.Level0_Vision_End,    "Brann" },
+
+        { EDialogName.Level1_Skill,    "Mentore" },
+        { EDialogName.Level1_Climb,    "Mentore" },
     };
 
     public static Dictionary<EDialogName, string> dialogFile = new Dictionary<EDialogName, string>()
@@ -30,5 +33,8 @@ public static class DialogDictionary
         { EDialogName.Level0_EndLevel,  "Level0_EndLevel" },
         { EDialogName.Level0_Vision_Start,  "Level0_Vision_Start" },
         { EDialogName.Level0_Vision_End,    "Level0_Vision_End" },
+
+        { EDialogName.Level1_Skill,    "Level1_Skill" },
+        { EDialogName.Level1_Climb,    "Level1_Climb" },
     };
 }

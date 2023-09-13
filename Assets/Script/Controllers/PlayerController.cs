@@ -1,22 +1,18 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 //TODO: Inserire classe "Player" che gestisce il controller, la vita, il danno (ed altro(?))
 internal class PlayerController : MonoBehaviour, EntityControllerInterface
 {
-	private const float MAX_RUN_SPEED = 8f;
 	private const float RUN_SPEED = 5f;
-	private const float RUN_SMOOTH_TIME = 5f;
+	private const float SPRINT_SPEED = 8f;
 
 	private Vector2 m_Speed;
-	private float m_CurrentRunSpeed;
-	private float m_CurrentSmoothVelocity;
 	private Rigidbody2D m_Rigidbody2D;
 	private Animator m_Animator;
+	private bool m_CanClimb;
 
 	[SerializeField]
     private GroundChecker m_GroundChecker;
@@ -31,8 +27,8 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 		m_Animator = GetComponent<Animator>();
 
 		m_Speed = Vector2.zero;
-		m_CurrentRunSpeed = 0f;
-		m_CurrentSmoothVelocity = 0f;
+
+		m_CanClimb = false;
 	}
 
 	// Update is called once per frame
@@ -40,11 +36,6 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 	{
 		// Speed
 		m_Speed = new Vector2(Mathf.Abs(m_Rigidbody2D.velocity.x), Mathf.Abs(m_Rigidbody2D.velocity.y));
-
-		// Speed Calculations
-		m_CurrentRunSpeed = RUN_SPEED;
-		if (m_Speed.x >= RUN_SPEED)
-			m_CurrentRunSpeed = Mathf.SmoothDamp(m_Speed.x, MAX_RUN_SPEED, ref m_CurrentSmoothVelocity, RUN_SMOOTH_TIME);
 
 		if (DialogManager.Singleton.IsDialogOpen())
 			StopMove();
@@ -54,6 +45,14 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 			Attack();
+
+		if (Input.GetKeyDown(KeyCode.UpArrow) && m_CanClimb)
+			Climb();
+		else
+        {
+			if (Input.GetKeyUp(KeyCode.UpArrow) || (!m_CanClimb && IsClimbing()))
+				StopClimb();
+		}
 
 		m_Animator.SetFloat("Speed", m_Speed.x);
 		m_Animator.SetBool("IsGrounded", m_GroundChecker.IsGrounded());
@@ -69,7 +68,7 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 	{
 		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
-			float speed = m_CurrentRunSpeed;
+			float speed = m_Animator.GetBool("isSprinting") ? SPRINT_SPEED : RUN_SPEED;
 
 			Vector2 velocity = m_Rigidbody2D.velocity;
 			velocity.x = speed * horizontalAxis;
@@ -87,11 +86,10 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 				scale.x = Mathf.Sign(horizontalAxis) * 0.2f;
 				transform.localScale = scale;
 			}
-
 		}
 	}
 
-	public bool Jump(float jumpStrength)
+    public bool Jump(float jumpStrength)
 	{
 		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
@@ -116,8 +114,38 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
 		{
 			if (!IsAttacking() && !IsMoving() && IsGrounded())
-				m_Animator.SetTrigger("Attack");
+            {
+				// TODO: Migliorare la selezione dell'attacco (non basarsi sul livello, ma ad esempio se possiede una spada o meno)
+				if (GameDataManager.Singleton.GetLevel() == 0)
+					m_Animator.SetTrigger("Attack");
+				else
+					m_Animator.SetTrigger("AttackWithSword");
+			}
 		}
+	}
+
+	public void Climb()
+	{
+		if (!GameManager.Singleton.IsDead() && !DialogManager.Singleton.IsDialogOpen())
+        {
+			if (m_CanClimb)
+			{
+				m_Animator.ResetTrigger("Jump");
+				m_Animator.SetTrigger("Climb");
+
+				Vector2 velocity = m_Rigidbody2D.velocity;
+				velocity.y = RUN_SPEED;
+				m_Rigidbody2D.velocity = velocity;
+
+				m_Rigidbody2D.gravityScale = 0f;
+			}
+		}
+	}
+
+	public void StopClimb()
+	{
+		m_Rigidbody2D.gravityScale = 1f;
+		m_Animator.SetBool("isClimbing", false);
 	}
 
 	public void HitAnimation()
@@ -128,6 +156,12 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 	public void DieAnimation()
 	{
 		m_Animator.SetTrigger("Die");
+	}
+
+	public void SprintAnimation()
+	{
+		StopMove();
+		m_Animator.SetTrigger("Sprint");
 	}
 
 	public void StopMove()
@@ -142,12 +176,17 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 		transform.position = GameDataManager.Singleton.GetLastCheckPointPosition();
 	}
 
+	public void SetCanClimbing(bool canClimb)
+	{
+		m_CanClimb = canClimb;
+	}
+
 	private bool IsMoving()
 	{
 		return m_Rigidbody2D.velocity.x > 0.1f;
 	}
 
-	private bool IsGrounded()
+	public bool IsGrounded()
 	{
 		return m_GroundChecker.IsGrounded();
 	}
@@ -155,5 +194,15 @@ internal class PlayerController : MonoBehaviour, EntityControllerInterface
 	public bool IsAttacking()
 	{
 		return m_Animator.GetBool("isAttacking");
+	}
+
+	public bool IsSprinting()
+	{
+		return m_Animator.GetBool("isSprinting");
+	}
+
+	public bool IsClimbing()
+	{
+		return m_Animator.GetBool("isClimbing");
 	}
 }

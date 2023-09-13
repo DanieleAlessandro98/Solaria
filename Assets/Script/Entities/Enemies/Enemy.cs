@@ -24,6 +24,7 @@ public class Enemy : Entity, EnemyInterface
     void Start()
     {
         controller = GetComponent<EnemyController>();
+        RecvDamage(0);
     }
 
     private void Update()
@@ -36,6 +37,8 @@ public class Enemy : Entity, EnemyInterface
         controller.DieAnimation();
 
         GetComponent<Collider2D>().enabled = false;
+        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+        rb2d.constraints = RigidbodyConstraints2D.FreezePositionY;
 
         if (m_IsFinalBoss)
             GameManager.Singleton.Win();

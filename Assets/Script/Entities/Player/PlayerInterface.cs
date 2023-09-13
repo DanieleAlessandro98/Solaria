@@ -8,4 +8,5 @@ public interface PlayerInterface
     void SetCoinsText();
     void RecvHit(int damage, bool isResetPosition = false);
     int GetDamage();
+    void SetCanClimbing(bool canClimb);
 }

@@ -9,13 +9,14 @@ internal class EnemyController : MonoBehaviour, EntityControllerInterface
     private const float DISTANCE_TOLERANCE = 0.1f;
 
     //TODO: Mettere nomi statici di queste animazioni da qualche parte (ad esempio anche per "State" e "ChargeAttack2H" in EnemyController)
-    private const string ENEMY_ATTACK_ANIMATION = "ChargeAttack2H";
+    private const string ENEMY_ATTACK_ANIMATION = "Attack";
 
     private Enemy enemy;
     private Vector3 m_SpawnPosition;
     private EEnemyState m_CurrentState;
     private bool m_IsAttacking;
     private Animator m_Animator;
+    private float m_Scale;
 
     [SerializeField]
     private Player m_Player;
@@ -47,15 +48,13 @@ internal class EnemyController : MonoBehaviour, EntityControllerInterface
         m_SpawnPosition = transform.position;
         m_CurrentState = EEnemyState.SpawnPosition;
         m_IsAttacking = false;
+        m_Scale = transform.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (m_Animator.GetBool("Action"))
-            return;
-
-        if (!m_IsFollowPlayer)
             return;
 
         float distanceSpawnPosition = Mathf.Abs(transform.position.x - m_SpawnPosition.x);
@@ -65,25 +64,43 @@ internal class EnemyController : MonoBehaviour, EntityControllerInterface
         {
             case EEnemyState.SpawnPosition:
                 {
-                    if (distancePlayer < m_PlayerFollowRange)
-                        m_CurrentState = EEnemyState.Follow;
-                }
-                break;
-
-            case EEnemyState.Follow:
-                {
-                    if (distanceSpawnPosition > m_InitialSpawnPositionRange || distancePlayer > m_PlayerFollowRange)
-                        m_CurrentState = EEnemyState.ReturnToSpawPosition;
-                    else
+                    if (!m_IsFollowPlayer)
                     {
-                        if (distancePlayer > m_AttackRange)
-                            MoveToPlayerPosition();
-                        else if (!m_IsAttacking)
+                        if (distancePlayer <= m_AttackRange && !m_IsAttacking)
                         {
                             m_CurrentState = EEnemyState.Attack;
 
                             if (enemy.IsAlive() && m_Player.IsAlive())
                                 StartCoroutine(AttackCoroutine());
+                        }
+                    }
+                    else
+                    {
+                        if (distancePlayer < m_PlayerFollowRange)
+                            m_CurrentState = EEnemyState.Follow;
+                    }
+                }
+                break;
+
+            case EEnemyState.Follow:
+                {
+                    if (!m_IsFollowPlayer)
+                        m_CurrentState = EEnemyState.SpawnPosition;
+                    else
+                    {
+                        if (distanceSpawnPosition > m_InitialSpawnPositionRange || distancePlayer > m_PlayerFollowRange)
+                            m_CurrentState = EEnemyState.ReturnToSpawPosition;
+                        else
+                        {
+                            if (distancePlayer > m_AttackRange)
+                                MoveToPlayerPosition();
+                            else if (!m_IsAttacking)
+                            {
+                                m_CurrentState = EEnemyState.Attack;
+
+                                if (enemy.IsAlive() && m_Player.IsAlive())
+                                    StartCoroutine(AttackCoroutine());
+                            }
                         }
                     }
                 }
@@ -159,14 +176,14 @@ internal class EnemyController : MonoBehaviour, EntityControllerInterface
     private Vector3 findDirection(float targetX)
     {
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Sign(targetX - transform.position.x) * 0.5f;
+        scale.x = Mathf.Sign(targetX - transform.position.x) * m_Scale;
         return scale;
     }
 
     private IEnumerator AttackCoroutine()
     {
         m_Animator.SetInteger("State", 0);
-        m_Animator.SetTrigger("ChargeAttack2H");
+        m_Animator.SetTrigger("Attack");
         m_IsAttacking = true;
 
         yield return new WaitForSeconds(m_AttackDelay);

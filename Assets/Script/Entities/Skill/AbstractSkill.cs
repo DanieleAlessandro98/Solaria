@@ -35,6 +35,7 @@ public abstract class AbstractSkill : MonoBehaviour
     public abstract bool CanUseSkill();
     public abstract void UseSkill();
     public abstract bool IsSkillKeyDown();
+    public abstract bool IsUsingSkill();
     public abstract void SetUnlockedSkillState(bool unlocked);
     public abstract void SetUsedSkillState(bool used);
 }
