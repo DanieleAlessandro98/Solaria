@@ -163,7 +163,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81867734}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: a2f037479a3c60f46b79e254a7ad8228, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a09e807c311fdd34eace69819ce6289e, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 308484274}
@@ -842,12 +842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc2a9a2312692c4ea9ab421bc057fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Rigidbody2D: {fileID: 130523327}
-  m_Animator: {fileID: 130523324}
   m_GroundChecker: {fileID: 1262540918}
   m_JumpStrength: 7
-  m_HealthBoard: {fileID: 0}
-  m_Damage: 10
 --- !u!70 &130523331
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1618,6 +1614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec676d4ed896e864c937bb0feea90354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BreakablePlatforms: []
 --- !u!61 &597496600
 BoxCollider2D:
   m_ObjectHideFlags: 0
