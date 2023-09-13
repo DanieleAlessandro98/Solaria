@@ -4905,19 +4905,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4925,7 +4925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4939,6 +4939,26 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1640024130}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_AttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_MovementSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_IsFollowPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_PlayerFollowRange
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_InitialSpawnPositionRange
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7953221986293271543, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_Name
       value: MeatBug (1)
@@ -7385,19 +7405,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7405,7 +7425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -7419,6 +7439,26 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1640024130}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_AttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_MovementSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_IsFollowPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_PlayerFollowRange
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_InitialSpawnPositionRange
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7953221986293271543, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_Name
       value: MeatBug (2)
@@ -14955,19 +14995,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14975,7 +15015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -14989,6 +15029,30 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1640024130}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_AttackDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_AttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_MovementSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_IsFollowPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_PlayerFollowRange
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_InitialSpawnPositionRange
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7953221986293271543, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_Name
       value: MeatBug (3)
@@ -16308,19 +16372,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16328,7 +16392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -16342,6 +16406,26 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1640024130}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_AttackRange
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_MovementSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_IsFollowPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_PlayerFollowRange
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_InitialSpawnPositionRange
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7953221986293271543, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_Name
       value: MeatBug (4)
@@ -30748,19 +30832,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30768,7 +30852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679102665983896883, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -30782,6 +30866,26 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1640024130}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_AttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_MovementSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_IsFollowPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_PlayerFollowRange
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488197935539214570, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
+      propertyPath: m_InitialSpawnPositionRange
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7953221986293271543, guid: 036568304d73fa0428c31c8569da0aae, type: 3}
       propertyPath: m_Name
       value: MeatBug
