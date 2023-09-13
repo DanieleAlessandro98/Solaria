@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Player : Entity, PlayerInterface
 {
-	private const int MAX_HEALTH = 3;
 	private readonly float DELAY_ENTITY_DIED = 3f;
 
 	private PlayerController controller;
@@ -15,6 +14,9 @@ public class Player : Entity, PlayerInterface
 
 	[SerializeField]
 	private HealthPlayerBoard m_HealthBoard;
+
+	[SerializeField]
+	private int m_MaxHealth;
 
 	[SerializeField]
 	private int m_Damage;
@@ -32,7 +34,7 @@ public class Player : Entity, PlayerInterface
 			controller.MoveToLastCheckpoint();
 
 		if (!GameManager.Singleton.IsValidHealth())
-			SetHealth(new Health(MAX_HEALTH));
+			SetHealth(new Health(m_MaxHealth));
 		else
 			SetHealth(GameDataManager.Singleton.GetHealth());
 		RecvDamage(0);

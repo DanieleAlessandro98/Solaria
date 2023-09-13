@@ -1275,6 +1275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CoinsText: {fileID: 1325516090}
   m_HealthBoard: {fileID: 1778497151}
+  m_MaxHealth: 3
   m_Damage: 10
 --- !u!1001 &167419806
 PrefabInstance:
