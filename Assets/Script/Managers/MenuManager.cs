@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField]
     private GameObject m_settingsCanvas;
+
+    [SerializeField]
+    private Slider volumeSlider;
 
     public static MenuManager Singleton
     {
@@ -37,6 +41,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         m_isShowingSettings = false;
+        volumeSlider.value = MusicManager.Singleton.GetAudioVolume();
     }
 
     public void StartGame()
@@ -63,5 +68,10 @@ public class MenuManager : MonoBehaviour
             m_menuCanvas.SetActive(false);
             m_settingsCanvas.SetActive(true);
         }
+    }
+
+    public void ChangeVolume(float newVolume)
+    {
+        MusicManager.Singleton.SetAudioVolume(newVolume);
     }
 }

@@ -214,7 +214,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 754989000}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ChangeVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &157405281
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_menuCanvas: {fileID: 157405281}
   m_settingsCanvas: {fileID: 1582283633}
+  volumeSlider: {fileID: 86841727}
 --- !u!4 &754989001
 Transform:
   m_ObjectHideFlags: 0
