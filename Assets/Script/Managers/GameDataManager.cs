@@ -13,9 +13,12 @@ public class GameDataManager : MonoBehaviour
     private static string LEVEL_PATH = Path.Combine(Path.Combine(Application.streamingAssetsPath, SAVE_PATH), SAVE_LEVEL_FILE);
     private const string SAVE_SESSION_FILE = "session_data";
     private static string SESSION_PATH = Path.Combine(Path.Combine(Application.streamingAssetsPath, SAVE_PATH), SAVE_SESSION_FILE);
+    private const string SAVE_SETTINGS_FILE = "settings_data";
+    private static string SETTINGS_PATH = Path.Combine(Path.Combine(Application.streamingAssetsPath, SAVE_PATH), SAVE_SETTINGS_FILE);
 
     private static GameDataManager m_Singleton;
 
+    private SettingsData m_SettingsData;
     private PlayerData m_PlayerLevelData;
     private PlayerData m_PlayerSessionData;
 
@@ -39,6 +42,7 @@ public class GameDataManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        LoadSettings(ESaveType.SETTINGS);
         Load(ESaveType.LEVEL);
         Load(ESaveType.SESSION);
     }
@@ -67,6 +71,11 @@ public class GameDataManager : MonoBehaviour
     {
         return m_PlayerSessionData.IsSkillUnlocked(skillName);
     }
+    
+    public float GetVolume()
+    {
+        return m_SettingsData.GetVolume();
+    }
 
     public void IncrementCoins()
     {
@@ -86,6 +95,12 @@ public class GameDataManager : MonoBehaviour
     public void UnlockSkill(ESkillName skillName)
     {
         m_PlayerSessionData.UnlockSkill(skillName);
+    }
+
+    public void SetVolume(float volume)
+    {
+        m_SettingsData.SetVolume(volume);
+        SaveSettings(ESaveType.SETTINGS);
     }
 
     public void ResetSessionData()
@@ -125,6 +140,19 @@ public class GameDataManager : MonoBehaviour
         Load(ESaveType.SESSION);
     }
 
+    private void SaveSettings(ESaveType saveType)
+    {
+        string path = FindPath(saveType);
+        if (!IsValidPath(path))
+            return;
+
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream fileStream = new FileStream(path, FileMode.Create);
+
+        binaryFormatter.Serialize(fileStream, m_SettingsData);
+        fileStream.Close();
+    }
+
     private void Save(ESaveType saveType)
     {
         string path = FindPath(saveType);
@@ -138,6 +166,27 @@ public class GameDataManager : MonoBehaviour
 
         binaryFormatter.Serialize(fileStream, playerData);
         fileStream.Close();
+    }
+
+    private void LoadSettings(ESaveType saveType)
+    {
+        string path = FindPath(saveType);
+        if (!IsValidPath(path))
+            return;
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(path, FileMode.Open);
+
+            m_SettingsData = (SettingsData)binaryFormatter.Deserialize(fileStream);
+            fileStream.Close();
+        }
+        else
+        {
+            m_SettingsData = new SettingsData();
+            SaveSettings(saveType);
+        }
     }
 
     private void Load(ESaveType saveType)
@@ -168,8 +217,10 @@ public class GameDataManager : MonoBehaviour
         string path;
         if (saveType == ESaveType.LEVEL)
             path = LEVEL_PATH;
-        else
+        else if (saveType == ESaveType.SESSION)
             path = SESSION_PATH;
+        else
+            path = SETTINGS_PATH;
 
         return path;
     }
@@ -186,5 +237,4 @@ public class GameDataManager : MonoBehaviour
     {
         return path != "";
     }
-
 }

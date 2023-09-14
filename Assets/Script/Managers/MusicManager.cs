@@ -40,6 +40,8 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_AudioSource.volume = GameDataManager.Singleton.GetVolume();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         PlayMusicForScene(SceneManager.GetActiveScene().name);
     }
@@ -92,5 +94,6 @@ public class MusicManager : MonoBehaviour
     public void SetAudioVolume(float newVolume)
     {
         m_AudioSource.volume = newVolume;
+        GameDataManager.Singleton.SetVolume(newVolume);
     }
 }

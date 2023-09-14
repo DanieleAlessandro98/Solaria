@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static readonly int FIRST_LEVEL = 0;
     public static readonly int FIRST_COIN = 0;
+    public static readonly float FIRST_VOLUME = 1f;
     private readonly float NEXT_LEVEL_DIALOG = 3f;
 
     private static GameManager m_Singleton;
