@@ -1,3 +1,5 @@
-Skill 2
+Corsa Arcana
 
-Descrizione blabla11
+Conferisce una velocità sovrumana, permettendo di attraversare zone pericolose a velocità vertiginosa.
+
+Per usarla premi 'F2' o clicca sull'icona dell'abilità.

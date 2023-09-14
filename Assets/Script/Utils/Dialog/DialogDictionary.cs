@@ -7,7 +7,6 @@ public static class DialogDictionary
     public static Dictionary<EDialogName, string> dialogNpcName = new Dictionary<EDialogName, string>()
     {
         //TODO: Togliere mentore e mettere nome official.
-        //TODO: Giusto mettere stringa statica in questo modo? o meglio fare un piccolo database-style?
         { EDialogName.Level0_Welcome,   "Mentore" },
         { EDialogName.Level0_Obstacle,  "Mentore" },
         { EDialogName.Level0_Jump,      "Mentore" },
@@ -20,6 +19,7 @@ public static class DialogDictionary
 
         { EDialogName.Level1_Skill,    "Mentore" },
         { EDialogName.Level1_Climb,    "Mentore" },
+        { EDialogName.Level1_EndLevel,  "Mentore" },
     };
 
     public static Dictionary<EDialogName, string> dialogFile = new Dictionary<EDialogName, string>()
@@ -36,5 +36,23 @@ public static class DialogDictionary
 
         { EDialogName.Level1_Skill,    "Level1_Skill" },
         { EDialogName.Level1_Climb,    "Level1_Climb" },
+        { EDialogName.Level1_EndLevel,  "Level1_EndLevel" },
+    };
+
+    public static Dictionary<EDialogName, string> dialogNpcImage = new Dictionary<EDialogName, string>()
+    {
+        { EDialogName.Level0_Welcome,   "Mentore" },
+        { EDialogName.Level0_Obstacle,  "Mentore" },
+        { EDialogName.Level0_Jump,      "Mentore" },
+        { EDialogName.Level0_Coin,      "Mentore" },
+        { EDialogName.Level0_Attack,    "Mentore" },
+        { EDialogName.Level0_Skill,     "Mentore" },
+        { EDialogName.Level0_EndLevel,  "Mentore" },
+        { EDialogName.Level0_Vision_Start,  "Protagonista" },
+        { EDialogName.Level0_Vision_End,    "Protagonista" },
+
+        { EDialogName.Level1_Skill,    "Mentore" },
+        { EDialogName.Level1_Climb,    "Mentore" },
+        { EDialogName.Level1_EndLevel,  "Mentore" },
     };
 }

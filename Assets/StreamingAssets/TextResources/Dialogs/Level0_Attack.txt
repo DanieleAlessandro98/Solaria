@@ -1,1 +1,3 @@
-Attacca, premi click ecc
+Ora e' il momento di imparare a combattere! Concentra la tua energia e lancia un colpo al nemico.
+
+Per attaccare, premi il tasto sinistro del mouse.

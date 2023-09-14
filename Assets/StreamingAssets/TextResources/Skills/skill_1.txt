@@ -1,3 +1,8 @@
-Skill 1
+Salto Celestiale
 
-Descrizione blabla11
+Permette di compiere un balzo straordinario verso l'alto, superando ostacoli e raggiungendo luoghi inaccessibili.
+
+Per usarla premi 'F1' o clicca sull'icona dell'abilità.
+
+
+

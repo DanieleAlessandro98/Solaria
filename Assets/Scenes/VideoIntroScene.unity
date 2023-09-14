@@ -253,7 +253,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8170797b01f05984b8c75f25abe69268, type: 3}
   - {fileID: 8300000, guid: 5d0a69b7391fb2f42902205bb69de1f3, type: 3}
   - {fileID: 8300000, guid: 779ad5d65123bec4b99607d51f2485d9, type: 3}
-  m_ScenesWithoutMusic: []
+  m_ScenesWithoutMusic:
+  - VideoIntroScene
+  - LevelScene
+  - DiedScene
+  - FutureVisionScene
 --- !u!4 &196140783
 Transform:
   m_ObjectHideFlags: 0
