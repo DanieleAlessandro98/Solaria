@@ -8,6 +8,10 @@ Solaria è un gioco platform fantasy sviluppato con Unity che trasporta i giocat
 Nel ruolo di Brann, un giovane guerriero con poteri magici, i giocatori affronteranno sfide, esploreranno paesaggi incantati e combatteranno creature malvagie mentre cercano di riportare l'armonia nel regno di Solaria.
 Ogni livello porterà nuove sfide e ostacoli, con abilità da sbloccare e segreti da svelare.
 
+### Design pattern utilizzati
+- **Singleton**
+- **State pattern**
+
 ## Requisiti di Sistema
 
 - Sistema Operativo: Windows 7/8/10, Linux
